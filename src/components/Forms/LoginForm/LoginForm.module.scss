@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4rem;
+
+  &__inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

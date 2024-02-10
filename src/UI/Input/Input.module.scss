@@ -1,0 +1,11 @@
+.input {
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid grey;
+  font-size: 1.6rem;
+
+  &:focus {
+    outline: 1px solid grey;
+  }
+}
