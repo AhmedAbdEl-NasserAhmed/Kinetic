@@ -1,6 +1,12 @@
-import { auth } from "../firebase/firebase";
-import { createUserWithEmailAndPassword } from "./firebase/auth";
+import toast from "react-hot-toast";
+import { auth } from "../firebase/firebase.js";
 
-export async function signUp(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password);
+import { signOut } from "firebase/auth";
+
+export async function userSignOut() {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    toast.error(err.message);
+  }
 }

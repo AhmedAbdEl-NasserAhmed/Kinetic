@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { emailPattern, passwordPattern } from "../../../utils/userTypes.js";
-
 import Button from "../../Button/Button";
-import Input from "../../../UI/Input/Input";
+import Input from "../../../ui/Input/Input";
+import { signupUser } from "../../../store/authSlice/authSlice.js";
+import { useAppDispatch } from "../../../hooks.ts/hooks";
 
 interface Props {
   handleSwitchForms: (boolean: boolean) => void;
@@ -19,14 +20,20 @@ function SignUpForm({ ...props }: Props) {
     mode: "onChange",
   });
 
+  const dispatch = useAppDispatch();
+
   const formData = watch();
 
-  console.log(errors);
+  function onSubmit() {
+    dispatch(
+      signupUser(
+        formData.signupEmail,
+        formData.signupPassword,
+        formData.username
+      )
+    );
 
-  console.log(formData);
-
-  function onSubmit(data: object) {
-    console.log(data);
+    props.handleSwitchForms(false);
   }
 
   return (
@@ -87,7 +94,7 @@ function SignUpForm({ ...props }: Props) {
             },
             min: {
               value: 16,
-              message: "Should more than 16 characters",
+              message: "Age should more than 16 years",
             },
           }}
         />

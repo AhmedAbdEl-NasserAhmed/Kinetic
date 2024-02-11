@@ -1,16 +1,21 @@
 import styles from "./LoginForm.module.scss";
-import Input from "../../../UI/Input/Input";
+import Input from "../../../ui/Input/Input";
 import Button from "../../Button/Button";
 import { useForm } from "react-hook-form";
+import { signinUser } from "../../../store/authSlice/authSlice";
+import { useAppDispatch } from "../../../hooks.ts/hooks";
 
 interface Props {
   handleSwitchForms: (boolean: boolean) => void;
 }
 
 function LoginForm({ ...props }: Props) {
+  const dispatch = useAppDispatch();
+
   const {
     watch,
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -18,12 +23,12 @@ function LoginForm({ ...props }: Props) {
 
   const formData = watch();
 
-  console.log(formData);
-
-  console.log(errors);
+  function hanldeSubmit() {
+    dispatch(signinUser(formData.loginEmail, formData.loginPassword));
+  }
 
   return (
-    <form className={styles["form"]}>
+    <form onSubmit={handleSubmit(hanldeSubmit)} className={styles["form"]}>
       <h2 className="font-bold text-6xl">Login</h2>
       <div className={styles["form__inputs-container"]}>
         <Input
