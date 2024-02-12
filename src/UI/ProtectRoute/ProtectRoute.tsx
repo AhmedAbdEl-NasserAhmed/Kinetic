@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../hooks.ts/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 
 function ProtectRoute({ children }) {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { useAppDispatch } from "../../hooks.ts/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import { userSignOut } from "../../store/authSlice/authSlice";
 import styles from "./ProfileMenu.module.scss";
 import Modal from "../../ui/Modal/Modal";

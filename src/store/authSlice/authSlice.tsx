@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
+  sendPasswordResetEmail,
   updatePassword,
 } from "firebase/auth";
 
@@ -104,6 +105,15 @@ export const userChangePassword =
       console.log(err);
     }
   };
+
+export const emailVerfication = (email: string) => async () => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    toast.success("An Email has been sent to change your password");
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const { loginUser, logoutUser } = authSlice.actions;
 

@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks.ts/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { useState } from "react";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import { HiPlay } from "react-icons/hi2";

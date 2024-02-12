@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage/AuthenticationPage";
 import WorkoutsPage from "./pages/WorkoutsPage/WorkoutsPage";
 import ProtectRoute from "./ui/ProtectRoute/ProtectRoute";
+import EmailVerficationPage from "./pages/EmailVerficationPage/EmailVerficationPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               </ProtectRoute>
             }
           />
+          <Route path="/emailVerfication" element={<EmailVerficationPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster

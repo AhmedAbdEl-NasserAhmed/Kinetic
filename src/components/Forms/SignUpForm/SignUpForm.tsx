@@ -3,7 +3,7 @@ import { emailPattern, passwordPattern } from "../../../utils/userTypes.js";
 import Button from "../../Button/Button";
 import Input from "../../../ui/Input/Input";
 import { signupUser } from "../../../store/authSlice/authSlice.js";
-import { useAppDispatch } from "../../../hooks.ts/hooks";
+import { useAppDispatch } from "../../../hooks/hooks.js";
 
 interface Props {
   handleSwitchForms: (boolean: boolean) => void;
@@ -113,7 +113,7 @@ function SignUpForm({ ...props }: Props) {
             },
             pattern: {
               value: passwordPattern,
-              message: "password must contains: A-z , 0-9 , @ #...",
+              message: "Password must contains: A-z , 0-9 , @ #...",
             },
           }}
         />
@@ -136,7 +136,7 @@ function SignUpForm({ ...props }: Props) {
         />
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-2">
         <Button value="submit" variation="main">
           Singup
         </Button>

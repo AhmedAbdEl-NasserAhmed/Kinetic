@@ -4,7 +4,7 @@ import { passwordPattern } from "../../../utils/userTypes";
 import Button from "../../Button/Button";
 import styles from "./ChangePassword.module.scss";
 import { userChangePassword } from "../../../store/authSlice/authSlice";
-import { useAppDispatch } from "../../../hooks.ts/hooks";
+import { useAppDispatch } from "../../../hooks/hooks";
 
 function ChangePassword() {
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ function ChangePassword() {
           },
           pattern: {
             value: passwordPattern,
-            message: "password must contains: A-z , 0-9 , @ #...",
+            message: "Password must contains: A-z , 0-9 , @ #...",
           },
         }}
       />
