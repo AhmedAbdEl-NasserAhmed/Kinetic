@@ -1,11 +1,11 @@
-import { useAppSelector } from "../../hooks.ts/hooks";
+import Nav from "../../components/Nav/Nav";
 
 function WorkoutsPage() {
-  const { user } = useAppSelector((store) => store.authentication);
-
-  console.log(user);
-
-  return <div>{user?.displayName}</div>;
+  return (
+    <div>
+      <Nav />
+    </div>
+  );
 }
 
 export default WorkoutsPage;

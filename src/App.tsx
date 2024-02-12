@@ -19,7 +19,7 @@ function App() {
             }
           />
           <Route
-            path="/workouts"
+            path="/programs"
             element={
               <ProtectRoute>
                 <WorkoutsPage />

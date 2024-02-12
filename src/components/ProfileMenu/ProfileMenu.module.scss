@@ -1,0 +1,16 @@
+.profile-menu {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  padding: 1.5rem;
+  border-radius: 5px;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--dark-blue);
+  background-color: white;
+  box-shadow: 1px -1px 5px 0px rgba(0, 0, 0, 0.3);
+}

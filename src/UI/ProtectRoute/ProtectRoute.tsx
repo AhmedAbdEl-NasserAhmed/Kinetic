@@ -13,7 +13,7 @@ function ProtectRoute({ children }) {
 
   useEffect(() => {
     if (user && isAuthenticated) {
-      navigate("/workouts");
+      navigate("/programs");
     } else {
       navigate("/");
     }

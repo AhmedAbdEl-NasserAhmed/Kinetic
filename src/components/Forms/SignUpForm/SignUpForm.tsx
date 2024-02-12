@@ -33,7 +33,7 @@ function SignUpForm({ ...props }: Props) {
       )
     );
 
-    props.handleSwitchForms(false);
+    if (!errors) props.handleSwitchForms(false);
   }
 
   return (
@@ -137,7 +137,9 @@ function SignUpForm({ ...props }: Props) {
       </div>
 
       <div className="flex flex-col items-center">
-        <Button variation="main">Singup</Button>
+        <Button value="submit" variation="main">
+          Singup
+        </Button>
         <span
           className="text-2xl mt-4 cursor-pointer"
           onClick={() => props.handleSwitchForms(false)}
