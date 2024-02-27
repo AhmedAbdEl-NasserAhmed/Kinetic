@@ -1,0 +1,9 @@
+.programs-days {
+  padding: 6rem 0;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+}

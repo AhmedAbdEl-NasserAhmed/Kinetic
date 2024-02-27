@@ -1,35 +1,34 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage/AuthenticationPage";
-import WorkoutsPage from "./pages/WorkoutsPage/WorkoutsPage";
-import ProtectRoute from "./ui/ProtectRoute/ProtectRoute";
+import ProgramsPage from "./pages/ProgramsPage/ProgramsPage";
 import EmailVerficationPage from "./pages/EmailVerficationPage/EmailVerficationPage";
+import ProgramDays from "./pages/ProgramDays/ProgramDays";
+import PageLayout from "./ui/PageLayout/PageLayout";
+import WorkoutsPage from "./pages/WorkoutsPage/WorkoutsPage";
+import AuthRoute from "./ui/AuthRoute/AuthRoute";
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectRoute>
-                <LoginPage />
-              </ProtectRoute>
-            }
-          />
-          <Route
-            path="/programs"
-            element={
-              <ProtectRoute>
-                <WorkoutsPage />
-              </ProtectRoute>
-            }
-          />
-          <Route path="/emailVerfication" element={<EmailVerficationPage />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthRoute>
+              <LoginPage />
+            </AuthRoute>
+          }
+        />
+
+        <Route element={<PageLayout />}>
+          <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/programs/:id" element={<ProgramDays />} />
+          <Route path="/programs/:id/:name" element={<WorkoutsPage />} />
+        </Route>
+
+        <Route path="/emailVerfication" element={<EmailVerficationPage />} />
+      </Routes>
       <Toaster
         toastOptions={{
           className: "",
@@ -52,7 +51,7 @@ function App() {
           },
         }}
       />
-    </div>
+    </BrowserRouter>
   );
 }
 

@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
         )}
       </div>
       <div className={styles["login-page__background"]}>
-        <span className={styles["login-page__overlay"]}>&npsb;</span>
+        <span className={styles["login-page__overlay"]}>&nbsp;</span>
       </div>
     </div>
   );

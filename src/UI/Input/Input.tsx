@@ -7,10 +7,13 @@ interface Props {
   id: string;
   name: string;
   type: string;
-  placeholder: string;
-  register: UseFormRegister<FieldValues>;
   errors: object;
-  validiationInputs: {
+  size: string;
+  disabled?: boolean;
+  register?: UseFormRegister<FieldValues>;
+  value?: string | number;
+  placeholder?: string;
+  validiationInputs?: {
     required: {
       value: boolean;
       message: string;
@@ -36,21 +39,55 @@ function Input({
   name,
   type,
   placeholder,
-  register,
   errors,
   validiationInputs,
+  register,
+  value,
+  size,
+  disabled,
 }: Props) {
+  const widthHandler = (_size) => `min(100%,${_size})`;
+
+  const getInputStyles = () => {
+    let inputStyles = {
+      width: widthHandler(size || "100%"),
+    };
+
+    switch (size) {
+      case "lg":
+        inputStyles = {
+          width: widthHandler("80rem"),
+        };
+        break;
+
+      case "md":
+        inputStyles = {
+          width: widthHandler("15rem"),
+        };
+        break;
+
+      default:
+        return inputStyles;
+    }
+
+    return inputStyles;
+  };
+
   return (
-    <>
+    <div className="flex flex-col gap-5">
       <input
+        name={name}
         id={id}
-        className={styles["input"]}
+        value={value}
+        style={{ width: getInputStyles().width }}
+        className={`${styles["input"]}`}
         type={type}
         placeholder={placeholder}
+        disabled={disabled}
         {...register(name, validiationInputs)}
       />
       {errors[name] && <ErrorMessage message={errors[name]?.message} />}
-    </>
+    </div>
   );
 }
 

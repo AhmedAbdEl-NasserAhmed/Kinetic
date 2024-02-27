@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { emailPattern, passwordPattern } from "../../../utils/userTypes.js";
-import Button from "../../Button/Button";
+import Button from "../../../ui/Button/Button.js";
 import Input from "../../../ui/Input/Input";
 import { signupUser } from "../../../store/authSlice/authSlice.js";
 import { useAppDispatch } from "../../../hooks/hooks.js";
@@ -45,6 +45,7 @@ function SignUpForm({ ...props }: Props) {
 
       <div className="flex flex-col gap-[1.8rem]">
         <Input
+          variation="fullWidth"
           name="username"
           id="username"
           register={register}
@@ -63,6 +64,7 @@ function SignUpForm({ ...props }: Props) {
           }}
         />
         <Input
+          variation="fullWidth"
           name="signupEmail"
           id="signupEmail"
           register={register}
@@ -81,6 +83,7 @@ function SignUpForm({ ...props }: Props) {
           }}
         />
         <Input
+          variation="fullWidth"
           name="age"
           id="age"
           register={register}
@@ -100,6 +103,7 @@ function SignUpForm({ ...props }: Props) {
         />
 
         <Input
+          variation="fullWidth"
           name="signupPassword"
           id="signupPassword"
           register={register}
@@ -119,6 +123,7 @@ function SignUpForm({ ...props }: Props) {
         />
 
         <Input
+          variation="fullWidth"
           name="reSignupRePassword"
           id="reSignupRePassword"
           register={register}
@@ -137,7 +142,7 @@ function SignUpForm({ ...props }: Props) {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <Button value="submit" variation="main">
+        <Button size="lg" value="submit" variation="main">
           Singup
         </Button>
         <span

@@ -1,15 +1,22 @@
 import { useForm } from "react-hook-form";
 import Input from "../../ui/Input/Input";
 import { emailPattern } from "../../utils/userTypes";
-import Button from "../../components/Button/Button";
-import { useAppDispatch } from "../../hooks/hooks";
+import Button from "../../ui/Button/Button";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { emailVerfication } from "../../store/authSlice/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function EmailVerficationPage() {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+
+  const { user } = useAppSelector((store) => store.authentication);
+
+  useEffect(() => {
+    if (user) navigate("/programs");
+  }, [user, navigate]);
 
   const {
     handleSubmit,
@@ -29,8 +36,14 @@ function EmailVerficationPage() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-[5rem]">
-      <nav className="bg-blue-800 p-[3rem] text-white text-5xl font-extrabold w-full ">
-        KINETIC
+      <nav className="flex justify-between items-center bg-blue-800 p-[3rem] text-white w-full ">
+        <p className="font-extrabold text-5xl">KINETIC</p>
+        <span
+          onClick={() => navigate("/")}
+          className="font-extrabold text-2xl cursor-pointer"
+        >
+          Go Back
+        </span>
       </nav>
       <form
         className=" flex flex-col gap-[1.5rem] text-center "
@@ -57,7 +70,7 @@ function EmailVerficationPage() {
             },
           }}
         />
-        <Button value="submit" variation="main">
+        <Button size="md" value="submit" variation="main">
           Confirm Email
         </Button>
       </form>

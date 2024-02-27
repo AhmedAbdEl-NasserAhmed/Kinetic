@@ -2,14 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
 
-function ProtectRoute({ children }) {
+function AuthRoute({ children }) {
   const navigate = useNavigate();
 
   const { user, isAuthenticated } = useAppSelector(
     (store) => store.authentication
   );
-
-  console.log();
 
   useEffect(() => {
     if (user && isAuthenticated) {
@@ -22,4 +20,4 @@ function ProtectRoute({ children }) {
   return children;
 }
 
-export default ProtectRoute;
+export default AuthRoute;

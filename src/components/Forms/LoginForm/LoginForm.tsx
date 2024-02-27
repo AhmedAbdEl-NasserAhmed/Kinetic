@@ -1,6 +1,6 @@
 import styles from "./LoginForm.module.scss";
 import Input from "../../../ui/Input/Input";
-import Button from "../../Button/Button";
+import Button from "../../../ui/Button/Button";
 import { useForm } from "react-hook-form";
 import { signinUser } from "../../../store/authSlice/authSlice";
 import { useAppDispatch } from "../../../hooks/hooks";
@@ -35,6 +35,7 @@ function LoginForm({ ...props }: Props) {
       <h2 className="font-bold text-6xl">Login</h2>
       <div className={styles["form__inputs-container"]}>
         <Input
+          variation="fullWidth"
           name="loginEmail"
           id="loginEmail"
           register={register}
@@ -49,6 +50,7 @@ function LoginForm({ ...props }: Props) {
           }}
         />
         <Input
+          variation="fullWidth"
           name="loginPassword"
           id="loginPassword"
           register={register}
@@ -64,7 +66,9 @@ function LoginForm({ ...props }: Props) {
         />
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Button variation="main">Login</Button>
+        <Button size="lg" variation="main">
+          Login
+        </Button>
         <span
           className="text-2xl mt-4 cursor-pointer"
           onClick={() => props.handleSwitchForms(true)}

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "../../../ui/Input/Input";
 import { passwordPattern } from "../../../utils/userTypes";
-import Button from "../../Button/Button";
+import Button from "../../../ui/Button/Button";
 import styles from "./ChangePassword.module.scss";
 import { userChangePassword } from "../../../store/authSlice/authSlice";
 import { useAppDispatch } from "../../../hooks/hooks";
@@ -29,6 +29,7 @@ function ChangePassword() {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-4xl font-bold">Change Password</h2>
       <Input
+        size="lg"
         errors={errors}
         placeholder="Reset Password"
         type="password"
@@ -47,8 +48,9 @@ function ChangePassword() {
         }}
       />
       <Input
+        size="lg"
         errors={errors}
-        placeholder="Confrim Password"
+        placeholder="Confirm Password"
         type="password"
         id="reResetPassword"
         name="reResetPassword"
@@ -62,7 +64,7 @@ function ChangePassword() {
             value === getValues().resetPassword || "Password does not match",
         }}
       />
-      <Button value="submit" variation="secondary">
+      <Button size="md" value="submit" variation="main">
         Reset Password
       </Button>
     </form>

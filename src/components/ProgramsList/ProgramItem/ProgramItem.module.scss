@@ -1,0 +1,25 @@
+.program-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 4rem;
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  border-radius: 15px;
+  height: 55vh;
+
+  &__heading {
+    font-size: 10rem;
+    width: 20%;
+    font-weight: 800;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 2rem;
+    letter-spacing: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}

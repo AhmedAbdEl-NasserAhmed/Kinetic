@@ -17,11 +17,17 @@ html {
 
 body {
   font-family: "Fira Sans", sans-serif;
-  overflow: hidden;
 }
 
 :root {
   --dark-blue: #081015;
   --dark-blue-50: rgb(30 64 175);
   --color-white: white;
+  --color-grey-10: #eaebed;
+  --color-grey-20: #b1b1b1;
+  --color-purple: #4778e0;
+}
+
+.full-width {
+  width: 100% !important;
 }

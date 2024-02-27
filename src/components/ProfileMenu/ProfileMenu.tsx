@@ -1,21 +1,32 @@
-import Button from "../Button/Button";
+import Button from "../../ui/Button/Button";
 import { useAppDispatch } from "../../hooks/hooks";
 import { userSignOut } from "../../store/authSlice/authSlice";
 import styles from "./ProfileMenu.module.scss";
 import Modal from "../../ui/Modal/Modal";
 import { useState } from "react";
 import ChangePassword from "../Forms/ChangePassword/ChangePassword";
+import { useNavigate } from "react-router-dom";
 function ProfileMenu() {
   const dispatch = useAppDispatch();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles["profile-menu"]}>
-      <Button onClick={() => setShowModal(true)} variation="secondary">
+      <Button onClick={() => setShowModal(true)} size="md" variation="main">
         Change Password
       </Button>
-      <Button onClick={() => dispatch(userSignOut())} variation="secondary">
+      <Button
+        onClick={(): void => {
+          dispatch(userSignOut()).then(() => {
+            navigate("/");
+          });
+        }}
+        size="md"
+        variation="main"
+      >
         Sign Out
       </Button>
       {showModal && (
