@@ -1,0 +1,30 @@
+.login-page {
+  display: flex;
+  align-items: center;
+}
+.login-page__forms-container {
+  display: flex;
+  flex-basis: 35%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.6rem;
+  height: 100vh;
+}
+.login-page__background {
+  position: relative;
+  flex: 1;
+  background-image: url(../../assets/images/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.login-page__overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-blue);
+  top: 0;
+  left: 0;
+  opacity: 0.75;
+}/*# sourceMappingURL=AuthenticationPage.module.css.map */

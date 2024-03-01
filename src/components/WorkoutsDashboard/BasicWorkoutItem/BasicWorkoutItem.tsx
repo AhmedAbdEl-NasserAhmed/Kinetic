@@ -1,6 +1,8 @@
 import { WorkoutObject } from "../../../interfaces/interfaces";
+import Menus from "../../../ui/Menus/Menus";
+import Modal from "../../../ui/Modal/Modal";
 import styles from "./BasicWorkoutItem.module.scss";
-import { HiDotsVertical } from "react-icons/hi";
+import { HiMiniEye, HiTrash, HiMiniPencilSquare } from "react-icons/hi2";
 
 interface Props {
   workout: WorkoutObject;
@@ -36,9 +38,22 @@ function BasicWorkoutItem({ workout }: Props) {
         </div>
       </div>
       <div>
-        <span className="text-3xl cursor-pointer">
-          <HiDotsVertical />
-        </span>
+        <Modal>
+          <Menus.Menu>
+            <Menus.Toggle id={workout.id} />
+            <Menus.List id={workout.id}>
+              <Modal.Open opens="details">
+                <Menus.Button icon={<HiMiniEye />}>Details</Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiMiniPencilSquare />}>Edit</Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+          </Menus.Menu>
+        </Modal>
       </div>
     </li>
   );

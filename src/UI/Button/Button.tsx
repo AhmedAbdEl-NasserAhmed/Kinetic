@@ -10,24 +10,26 @@ interface Props {
 }
 
 interface Variations {
-  main: string;
+  primary: string;
+  danger: string;
 }
 
 const variations: Variations = {
-  main: " bg-blue-800 ",
+  primary: " bg-blue-800 ",
+  danger: "bg-red-600",
 };
 
 function Button({ children, variation, onClick, value, size, type }: Props) {
   const buttonSizes = () => {
     let buttonSize = {
-      padding: " inline-block  p-[1.2rem] text-[1.5rem] rounded-[5px]",
+      padding: " inline-block w-full  p-[1.2rem] text-[1.5rem] rounded-[5px]",
     };
 
     switch (size) {
       case "xl":
         buttonSize = {
           padding:
-            " fixed flex items-center justify-center right-[4rem] bottom-[6rem] text-[3.5rem] z-[200] text-[1.4rem] w-[8rem] h-[8rem] rounded-[50%]",
+            " fixed flex items-center justify-center right-[4rem] bottom-[6rem] text-[3.5rem] text-[1.4rem] w-[8rem] h-[8rem] rounded-[50%]",
         };
         break;
 

@@ -1,7 +1,6 @@
 .btn {
   color: var(--color-white);
-  background-color: var(--dark-blue-50);
-  transition: 0.5s all;
+  transition: 0.3s all ease-in-out;
   &:active {
     transform: translateY(2px);
   }

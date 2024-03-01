@@ -64,7 +64,7 @@ function ChangePassword() {
             value === getValues().resetPassword || "Password does not match",
         }}
       />
-      <Button size="md" value="submit" variation="main">
+      <Button size="md" value="submit" variation="primary">
         Reset Password
       </Button>
     </form>

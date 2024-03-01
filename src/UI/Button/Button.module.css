@@ -1,0 +1,7 @@
+.btn {
+  color: var(--color-white);
+  transition: 0.3s all ease-in-out;
+}
+.btn:active {
+  transform: translateY(2px);
+}/*# sourceMappingURL=Button.module.css.map */

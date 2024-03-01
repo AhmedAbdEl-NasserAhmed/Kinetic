@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useAppSelector } from "../../hooks/hooks";
 import { useFetchWorkoutsQuery } from "../../services/workoutApi";
 import { useParams } from "react-router-dom";
@@ -6,22 +5,19 @@ import Spinner from "../../ui/Spinner/Spinner";
 import Container from "../../ui/Container/Container";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import WorkoutsList from "./WorkoutsList/WorkoutsList";
+import Menus from "../../ui/Menus/Menus";
 
-function WorkoutsDashboard({ showModal }) {
+function WorkoutsDashboard() {
   const { user } = useAppSelector((state) => state.authentication);
 
   const { name } = useParams();
 
-  const { data, isLoading, refetch } = useFetchWorkoutsQuery({
+  const { data, isLoading, isFetching } = useFetchWorkoutsQuery({
     workoutCategory: name,
     userId: user?.uuid || user?.uid,
   });
 
-  useEffect(() => {
-    refetch();
-  }, [refetch, showModal]);
-
-  if (isLoading) return <Spinner />;
+  if (isLoading || isFetching) return <Spinner />;
 
   return (
     <div>
@@ -31,7 +27,9 @@ function WorkoutsDashboard({ showModal }) {
         <span>{<HiArrowRight />}</span>
       </div>
       <Container>
-        <WorkoutsList workouts={data} />
+        <Menus>
+          <WorkoutsList workouts={data} />
+        </Menus>
       </Container>
     </div>
   );

@@ -1,0 +1,17 @@
+.sub-nav {
+  position: relative;
+  padding: 4rem 0;
+  background-color: var(--color-grey-10);
+}
+.sub-nav__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-nav span {
+  position: absolute;
+  right: 0rem;
+  height: 6rem;
+  width: 1.5rem;
+  background-color: var(--dark-blue-50);
+}/*# sourceMappingURL=SubNav.module.css.map */

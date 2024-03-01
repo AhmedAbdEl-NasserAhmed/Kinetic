@@ -1,0 +1,8 @@
+.programs {
+  padding: 4rem 0;
+}
+.programs__container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}/*# sourceMappingURL=ProgramsList.module.css.map */

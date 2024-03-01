@@ -6,7 +6,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+  z-index: 100;
 }
 
 .overlay {
@@ -15,7 +15,8 @@
   width: 100%;
   top: 0;
   left: 0;
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 50;
-}
+}/*# sourceMappingURL=Modal.module.css.map */

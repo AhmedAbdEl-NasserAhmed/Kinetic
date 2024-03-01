@@ -1,0 +1,8 @@
+.programs-days {
+  padding: 6rem 0;
+}
+.programs-days__container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}/*# sourceMappingURL=ProgramsDaysList.module.css.map */

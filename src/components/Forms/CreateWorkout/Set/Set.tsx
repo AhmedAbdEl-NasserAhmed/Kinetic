@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import styles from "./Set.module.scss";
 
-function Set({ set, handleShowModal, setSelectedSet, sets, showModal }) {
+function Set({
+  set,
+  handleShowSetDetailsModal,
+  setSelectedSet,
+  sets,
+  showSetDetailsModal,
+}) {
   const [isPrevious, setIsPrevious] = useState<boolean>(true);
 
   useEffect(() => {
     setIsPrevious(
       set === sets[0] ? true : sets[sets.indexOf(set) - 1]?.isCompleted
     );
-  }, [set, setIsPrevious, sets, showModal]);
+  }, [set, setIsPrevious, sets, showSetDetailsModal]);
 
   return (
     <div
       onClick={() => {
         setSelectedSet(set);
-        handleShowModal(isPrevious);
+        handleShowSetDetailsModal(isPrevious);
       }}
       className={`${styles["set"]} ${
         isPrevious ? "bg-slate-100" : "bg-red-500"

@@ -1,0 +1,12 @@
+.form {
+  position: relative;
+  padding: 2.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  width: 50vw;
+  height: 80vh;
+  overflow-y: scroll;
+}/*# sourceMappingURL=CreateWorkout.module.css.map */

@@ -35,7 +35,7 @@ function LoginForm({ ...props }: Props) {
       <h2 className="font-bold text-6xl">Login</h2>
       <div className={styles["form__inputs-container"]}>
         <Input
-          variation="fullWidth"
+          size="lg"
           name="loginEmail"
           id="loginEmail"
           register={register}
@@ -50,7 +50,7 @@ function LoginForm({ ...props }: Props) {
           }}
         />
         <Input
-          variation="fullWidth"
+          size="lg"
           name="loginPassword"
           id="loginPassword"
           register={register}
@@ -66,7 +66,7 @@ function LoginForm({ ...props }: Props) {
         />
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Button size="lg" variation="main">
+        <Button size="lg" variation="primary">
           Login
         </Button>
         <span

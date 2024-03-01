@@ -2,18 +2,12 @@ import { useEffect, useRef } from "react";
 import Button from "../../../ui/Button/Button";
 import Input from "../../../ui/Input/Input";
 import styles from "./SetsDetails.module.scss";
-
-interface ISetObject {
-  id: string;
-  setsWeight: string;
-  setsReps: string;
-  isCompleted: boolean;
-}
+import { ISetObject } from "../../../interfaces/interfaces";
 
 function SetsDetails({
   register,
   errors,
-  handleShowModal,
+  handleShowSetDetailsModal,
   resetField,
   sets,
   selectedSet,
@@ -35,13 +29,13 @@ function SetsDetails({
   useEffect(() => {
     function handler(e: Event) {
       if (overlayRef.current === e.target) {
-        handleShowModal(false);
+        handleShowSetDetailsModal(false);
       }
     }
     window.addEventListener("click", handler);
 
     return () => window.removeEventListener("click", handler);
-  }, [handleShowModal]);
+  }, [handleShowSetDetailsModal]);
 
   return (
     <div>
@@ -101,10 +95,10 @@ function SetsDetails({
             },
           }}
         />
-        <div className="flex items-center gap-7">
+        <div className="flex justify-center items-center gap-7">
           <Button
             onClick={() => {
-              handleShowModal(false);
+              handleShowSetDetailsModal(false);
               modifySet();
               resetField("setsDetailReps");
               resetField("setsDetailWeight");
@@ -116,11 +110,11 @@ function SetsDetails({
           </Button>
           <Button
             onClick={() => {
-              handleShowModal(false);
+              handleShowSetDetailsModal(false);
               resetField("setsDetailReps");
               resetField("setsDetailWeight");
             }}
-            variation="primary"
+            variation="danger"
             size="lg"
           >
             Cancel

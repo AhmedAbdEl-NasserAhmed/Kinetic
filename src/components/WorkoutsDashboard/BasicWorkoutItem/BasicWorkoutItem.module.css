@@ -8,13 +8,11 @@
   border-radius: 1.5rem;
   border: 2px solid var(--color-purple);
   border-bottom: 4px solid var(--color-purple);
-
-  &__name {
-    font-size: 3rem;
-    font-weight: 800;
-  }
-
-  &__details {
-    font-size: 1.5rem;
-  }
 }
+.workout-item__name {
+  font-size: 3rem;
+  font-weight: 800;
+}
+.workout-item__details {
+  font-size: 1.5rem;
+}/*# sourceMappingURL=BasicWorkoutItem.module.css.map */

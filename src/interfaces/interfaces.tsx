@@ -1,7 +1,7 @@
 export interface ISetObject {
   id: string;
-  setsWeight: number;
-  setsReps: number;
+  setsWeight: string;
+  setsReps: string;
   isCompleted: boolean;
   weightUnit: string;
 }
@@ -10,8 +10,8 @@ export interface DefaultValues {
   workoutName?: string;
   setsNumber?: number;
   targetedMuscle?: string;
-  setsDetailReps?: number;
-  setsDetailWeight?: number;
+  setsDetailReps?: string;
+  setsDetailWeight?: string;
 }
 
 export interface WorkoutObject {

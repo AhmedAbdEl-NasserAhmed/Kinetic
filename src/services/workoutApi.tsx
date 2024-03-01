@@ -5,12 +5,15 @@ import useUpdateWorkout from "../hooks/useUpdateWorkout";
 export const workoutApi = createApi({
   reducerPath: "workoutApi",
   baseQuery: fakeBaseQuery(),
+  tagTypes: ["workouts"],
   endpoints: (builder) => ({
     fetchWorkouts: builder.query({
       queryFn: useGetWorkout,
+      providesTags: ["workouts"],
     }),
     addWorkoutProgram: builder.mutation({
       queryFn: useUpdateWorkout,
+      invalidatesTags: ["workouts"],
     }),
   }),
 });

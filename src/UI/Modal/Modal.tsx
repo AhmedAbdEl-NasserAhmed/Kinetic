@@ -1,35 +1,59 @@
+import { cloneElement, createContext, useContext, useState } from "react";
 import styles from "./Modal.module.scss";
 import { createPortal } from "react-dom";
-import { useEffect, useRef } from "react";
+import useClickOutside from "../../hooks/useClickOutside";
 
-interface Props {
-  children: React.ReactNode;
-  handleShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+interface ModalContext {
+  openName: string;
+  close: (openName: string) => void;
+  open: (openName: string) => void;
 }
 
-function Modal({ children, handleShowModal }: Props) {
-  const menuRef = useRef<HTMLDivElement>();
+const ModalContext = createContext({} as ModalContext);
 
-  useEffect(() => {
-    function handler(e: Event) {
-      if (menuRef?.current?.contains(e.target as Node)) {
-        handleShowModal(false);
-      }
-    }
+function Modal({ children }) {
+  const [openName, setopenName] = useState("");
 
-    window.addEventListener("click", handler);
+  const close = () => setopenName("");
 
-    return () => window.removeEventListener("click", handler);
-  }, [menuRef, handleShowModal]);
+  const open = setopenName;
+
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+function Open({ children, opens: modalWindowName }) {
+  const { open } = useContext(ModalContext);
+
+  return cloneElement(children, { onClick: () => open(modalWindowName) });
+}
+
+function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+
+  const modalRef = useClickOutside({ close });
+
+  if (openName !== name) return null;
 
   return createPortal(
-    <div>
-      <div className={styles.overlay} ref={menuRef}></div>
-      <div className={styles.modal}>{children}</div>
+    <div className={styles.overlay}>
+      <div ref={modalRef} className={styles.modal}>
+        <div>
+          {cloneElement(children, {
+            setShowModal: close,
+          })}
+        </div>
+      </div>
     </div>,
-
     document.getElementById("modal")
   );
 }
+
+Modal.Open = Open;
+
+Modal.Window = Window;
 
 export default Modal;

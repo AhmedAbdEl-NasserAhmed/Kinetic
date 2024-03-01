@@ -1,4 +1,4 @@
-import styles from "./AddWorkout.module.scss";
+import styles from "./CreateWorkout.module.scss";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { radioButtons } from "../../../constants/RadioButtons";
@@ -7,22 +7,26 @@ import Button from "../../../ui/Button/Button";
 import HiddenRadioButton from "../../HiddenRadioButton/HiddenRadioButton";
 import ErrorMessage from "../../../ui/ErrorMessage/ErrorMessage";
 import SetsDetails from "../SetsDetails/SetsDetails";
-import Set from "../AddWorkout/Set/Set";
+import Set from "./Set/Set";
 import toast from "react-hot-toast";
 import { useAppSelector } from "../../../hooks/hooks";
 import { useAddWorkoutProgramMutation } from "../../../services/workoutApi";
 import { useParams } from "react-router-dom";
 import { ISetObject, DefaultValues } from "../../../interfaces/interfaces";
 
+interface Props {
+  setShowModal?: (showModal: string) => void;
+}
+
 const defaultValues: DefaultValues = {
   workoutName: "",
   setsNumber: 0,
   targetedMuscle: "",
-  setsDetailReps: 0,
-  setsDetailWeight: 0,
+  setsDetailReps: "",
+  setsDetailWeight: "",
 };
 
-function AddWorkout({ setShowModal }) {
+function CreateWorkout({ setShowModal }: Props) {
   const {
     register,
     clearErrors,
@@ -42,11 +46,11 @@ function AddWorkout({ setShowModal }) {
 
   const [selectedSet, setSelectedSet] = useState<ISetObject>();
 
-  const [showModal, handleShowModal] = useState<boolean>(false);
-
   const [totalSets, setTotalSets] = useState<number>(0);
 
   const [weightUnit, setWeightUnit] = useState<string>("KG");
+
+  const [showSetDetails, setShowSetDetails] = useState(false);
 
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
@@ -60,8 +64,8 @@ function AddWorkout({ setShowModal }) {
     if (formData.setsNumber >= 1 && formData.setsNumber > totalSets) {
       const setObject: ISetObject = {
         id: crypto.randomUUID(),
-        setsWeight: 0,
-        setsReps: 0,
+        setsWeight: "",
+        setsReps: "",
         isCompleted: false,
         weightUnit: "",
       };
@@ -100,7 +104,7 @@ function AddWorkout({ setShowModal }) {
       workoutCategory: name,
     });
 
-    setShowModal(false);
+    setShowModal("");
   }
 
   function addSet() {
@@ -187,10 +191,15 @@ function AddWorkout({ setShowModal }) {
           }}
         />
         <div className="flex items-center gap-10">
-          <Button type="button" size="sm" variation="main" onClick={addSet}>
+          <Button type="button" size="sm" variation="primary" onClick={addSet}>
             +
           </Button>
-          <Button type="button" size="sm" variation="main" onClick={removeSet}>
+          <Button
+            type="button"
+            size="sm"
+            variation="primary"
+            onClick={removeSet}
+          >
             -
           </Button>
         </div>
@@ -200,18 +209,18 @@ function AddWorkout({ setShowModal }) {
           <Set
             key={set.id}
             setSelectedSet={setSelectedSet}
-            handleShowModal={handleShowModal}
-            showModal={showModal}
+            handleShowSetDetailsModal={setShowSetDetails}
+            showSetDetailsModal={showSetDetails}
             set={set}
             sets={sets}
           />
         ))}
       </div>
 
-      {showModal && (
+      {showSetDetails && (
         <SetsDetails
           resetField={resetField}
-          handleShowModal={handleShowModal}
+          handleShowSetDetailsModal={setShowSetDetails}
           errors={errors}
           register={register}
           sets={sets}
@@ -229,4 +238,4 @@ function AddWorkout({ setShowModal }) {
   );
 }
 
-export default AddWorkout;
+export default CreateWorkout;

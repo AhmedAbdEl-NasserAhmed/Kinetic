@@ -31,3 +31,8 @@ body {
 .full-width {
   width: 100% !important;
 }
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
