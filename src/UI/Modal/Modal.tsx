@@ -34,7 +34,7 @@ function Open({ children, opens: modalWindowName }) {
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
 
-  const modalRef = useClickOutside({ close });
+  const modalRef = useClickOutside({ close, StopBubbling: true });
 
   if (openName !== name) return null;
 

@@ -44,18 +44,19 @@ function Menu({ children }) {
 function Toggle({ id }) {
   const { openId, close, setPosition, openHandler } = useContext(MenusContext);
 
-  // function removeScrollingOpenMenu() {
-  //   document.body.classList.add("stop-scrolling");
+  function removeScrollingOpenMenu() {
+    document.body.classList.add("stop-scrolling");
+    openHandler(id);
+  }
 
-  //   console.log("id");
-  // }
-
-  // function addScrollingCloseMenu() {
-  //   document.body.classList.remove("stop-scrolling");
-  //   close("");
-  // }
+  function addScrollingCloseMenu() {
+    document.body.classList.remove("stop-scrolling");
+    close("");
+  }
 
   function handleClick(e) {
+    e.stopPropagation();
+
     const rect = e.target.closest("button").getBoundingClientRect();
 
     setPosition({
@@ -65,7 +66,9 @@ function Toggle({ id }) {
 
     console.log("openId", openId);
 
-    openId === "" || openId !== id ? openHandler(id) : close("");
+    openId === "" || openId !== id
+      ? removeScrollingOpenMenu()
+      : addScrollingCloseMenu();
   }
 
   return (
@@ -78,7 +81,7 @@ function Toggle({ id }) {
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
 
-  const menuRef = useClickOutside({ close });
+  const menuRef = useClickOutside({ close, StopBubbling: false });
 
   if (openId !== id) return null;
 

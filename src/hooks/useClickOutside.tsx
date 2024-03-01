@@ -5,7 +5,7 @@ interface Props {
   StopBubbling?: boolean;
 }
 
-function useClickOutside({ close, StopBubbling = true }: Props) {
+function useClickOutside({ close, StopBubbling }: Props) {
   const ref = useRef(null);
 
   useEffect(() => {

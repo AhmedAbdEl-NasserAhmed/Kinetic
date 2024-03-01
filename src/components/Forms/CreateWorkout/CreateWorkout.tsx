@@ -197,7 +197,7 @@ function CreateWorkout({ setShowModal }: Props) {
           <Button
             type="button"
             size="sm"
-            variation="primary"
+            variation="danger"
             onClick={removeSet}
           >
             -
