@@ -1,19 +1,12 @@
 import styles from "./HiddenRadioButton.module.scss";
-import { UseFormRegister, FieldValues } from "react-hook-form";
 
-interface Props {
-  name: string;
-  id: string;
-  value: string;
+interface InputProps {
   label: string;
-  register: UseFormRegister<FieldValues>;
   className: boolean;
-  validiationInputs?: {
-    required: {
-      value: boolean;
-      message: string;
-    };
-  };
+  name?: string;
+  id?: string;
+  value?: string;
+  register?: object;
 }
 
 function HiddenRadioButton({
@@ -22,9 +15,8 @@ function HiddenRadioButton({
   value,
   label,
   register,
-  validiationInputs,
   className,
-}: Props) {
+}: InputProps) {
   return (
     <div>
       <label
@@ -36,7 +28,7 @@ function HiddenRadioButton({
         {label}
         <input
           className="hidden"
-          {...register(name, validiationInputs)}
+          {...register}
           name={name}
           id={id}
           type="radio"

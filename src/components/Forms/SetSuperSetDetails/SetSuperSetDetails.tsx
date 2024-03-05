@@ -1,44 +1,49 @@
 import { useEffect, useRef } from "react";
 import Button from "../../../ui/Button/Button";
 import Input from "../../../ui/Input/Input";
-import styles from "./SetsDetails.module.scss";
-import { ISetObject } from "../../../interfaces/interfaces";
+import styles from "./SetSuperSetDetails.module.scss";
+import { SuperSetObject } from "../../../interfaces/interfaces";
 
-function SetsDetails({
+function SetSuperSetDetails({
   register,
   errors,
   handleShowSetDetailsModal,
   resetField,
-  sets,
-  selectedSet,
+  superSets,
+  selectedSuperSet,
   formData,
   setWeightUnit,
   weightUnit,
 }) {
   const overlayRef = useRef<HTMLElement>(null);
 
-  const chosenSet = sets.find((set: ISetObject) => set.id === selectedSet.id);
+  const chosenSuperSet = superSets.find(
+    (superSet: SuperSetObject) => superSet.id === selectedSuperSet.id
+  );
 
-  function modifySet() {
-    chosenSet.setsWeight = +formData.setsDetailWeight;
-    chosenSet.setsReps = +formData.setsDetailReps;
-    if (chosenSet.setsWeight && chosenSet.setsReps)
-      chosenSet.isCompleted = true;
-    chosenSet.weightUnit = weightUnit;
+  function modifySuperSet() {
+    chosenSuperSet.setsWeight = +formData.superSet?.setsSuperSetWeight;
+
+    chosenSuperSet.setsReps = +formData.superSet?.setsSuperSetReps;
+
+    if (chosenSuperSet.setsWeight && chosenSuperSet.setsReps)
+      chosenSuperSet.isCompleted = true;
+
+    chosenSuperSet.weightUnit = weightUnit;
   }
 
   useEffect(() => {
     function handler(e: Event) {
       if (overlayRef.current === e.target) {
         handleShowSetDetailsModal(false);
+        resetField("superSet.setsSuperSetReps");
+        resetField("superSet.setsSuperSetWeight");
       }
     }
     window.addEventListener("click", handler);
 
     return () => window.removeEventListener("click", handler);
-  }, [handleShowSetDetailsModal]);
-
-  // console.log("setsContainer", setsContainer);
+  }, [handleShowSetDetailsModal, resetField]);
 
   return (
     <div>
@@ -63,8 +68,8 @@ function SetsDetails({
         <Input
           size="lg"
           placeholder="REPS NUMBERS :"
-          id="setsDetailReps"
-          name="setsDetailReps"
+          id="setsSuperSetReps"
+          name="superSet.setsSuperSetReps"
           type="number"
           register={register}
           errors={errors}
@@ -82,8 +87,8 @@ function SetsDetails({
         <Input
           size="lg"
           placeholder="REPS WEIGHT :"
-          id="setsDetailWeight"
-          name="setsDetailWeight"
+          id="setsSuperSetWeight"
+          name="superSet.setsSuperSetWeight"
           type="number"
           register={register}
           errors={errors}
@@ -102,9 +107,9 @@ function SetsDetails({
           <Button
             onClick={() => {
               handleShowSetDetailsModal(false);
-              modifySet();
-              resetField("setsDetailReps");
-              resetField("setsDetailWeight");
+              modifySuperSet();
+              resetField("superSet.setsSuperSetReps");
+              resetField("superSet.setsSuperSetWeight");
             }}
             variation="primary"
             size="lg"
@@ -114,8 +119,8 @@ function SetsDetails({
           <Button
             onClick={() => {
               handleShowSetDetailsModal(false);
-              resetField("setsDetailReps");
-              resetField("setsDetailWeight");
+              resetField("superSet.setsSuperSetReps");
+              resetField("superSet.setsSuperSetWeight");
             }}
             variation="danger"
             size="lg"
@@ -131,4 +136,4 @@ function SetsDetails({
   );
 }
 
-export default SetsDetails;
+export default SetSuperSetDetails;

@@ -17,7 +17,8 @@ function WorkoutsDashboard() {
     userId: user?.uuid || user?.uid,
   });
 
-  if (isLoading || isFetching) return <Spinner />;
+  if (isLoading || isFetching)
+    return <Spinner borderColor="#1e40af" width="46" height="46" margin="15" />;
 
   return (
     <div>

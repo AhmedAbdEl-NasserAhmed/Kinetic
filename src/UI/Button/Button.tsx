@@ -4,6 +4,7 @@ interface Props {
   children: React.ReactNode;
   variation: string;
   size: string;
+  disabled?: boolean;
   onClick?: () => void;
   type?: "submit" | "reset" | "button";
   value?: string;
@@ -11,15 +12,25 @@ interface Props {
 
 interface Variations {
   primary: string;
+  secondary: string;
   danger: string;
 }
 
 const variations: Variations = {
   primary: " bg-blue-800 ",
+  secondary: "bg-slate-600",
   danger: "bg-red-600",
 };
 
-function Button({ children, variation, onClick, value, size, type }: Props) {
+function Button({
+  children,
+  variation,
+  onClick,
+  value,
+  size,
+  type,
+  disabled,
+}: Props) {
   const buttonSizes = () => {
     let buttonSize = {
       padding: " inline-block w-full  p-[1.2rem] text-[1.5rem] rounded-[5px]",
@@ -36,14 +47,14 @@ function Button({ children, variation, onClick, value, size, type }: Props) {
       case "md":
         buttonSize = {
           padding:
-            " inline-block  w-[100%] p-[1.2rem] text-[1.4rem] rounded-[10px]",
+            " inline-block  w-[100%] p-[1.2rem] text-[1.5rem] rounded-[10px]",
         };
         break;
 
       case "sm":
         buttonSize = {
           padding:
-            " inline-block rounded-[5px] w-[100%] py-[0.8rem] px-[1.4rem] text-[1.2rem] ",
+            " inline-block rounded-[5px] w-[100%] py-[0.8rem] px-[1.4rem] text-[1.4rem] ",
         };
         break;
     }
@@ -53,12 +64,13 @@ function Button({ children, variation, onClick, value, size, type }: Props) {
 
   return (
     <button
+      disabled={disabled}
       type={type}
       value={value}
       onClick={onClick}
       className={`${styles["btn"]} ${
         variations[variation as keyof Variations]
-      }  ${buttonSizes().padding}`}
+      }  ${buttonSizes().padding} `}
     >
       {children}
     </button>

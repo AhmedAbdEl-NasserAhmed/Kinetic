@@ -45,7 +45,7 @@ function SignUpForm({ ...props }: Props) {
 
       <div className="flex flex-col gap-[1.8rem]">
         <Input
-          variation="fullWidth"
+          size="lg"
           name="username"
           id="username"
           register={register}
@@ -64,7 +64,7 @@ function SignUpForm({ ...props }: Props) {
           }}
         />
         <Input
-          variation="fullWidth"
+          size="lg"
           name="signupEmail"
           id="signupEmail"
           register={register}
@@ -83,7 +83,7 @@ function SignUpForm({ ...props }: Props) {
           }}
         />
         <Input
-          variation="fullWidth"
+          size="lg"
           name="age"
           id="age"
           register={register}
@@ -103,7 +103,7 @@ function SignUpForm({ ...props }: Props) {
         />
 
         <Input
-          variation="fullWidth"
+          size="lg"
           name="signupPassword"
           id="signupPassword"
           register={register}
@@ -123,7 +123,7 @@ function SignUpForm({ ...props }: Props) {
         />
 
         <Input
-          variation="fullWidth"
+          size="lg"
           name="reSignupRePassword"
           id="reSignupRePassword"
           register={register}

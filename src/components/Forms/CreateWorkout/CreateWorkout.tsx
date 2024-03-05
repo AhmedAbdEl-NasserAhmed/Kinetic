@@ -1,5 +1,5 @@
 import styles from "./CreateWorkout.module.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { radioButtons } from "../../../constants/RadioButtons";
 import Input from "../../../ui/Input/Input";
@@ -7,15 +7,21 @@ import Button from "../../../ui/Button/Button";
 import HiddenRadioButton from "../../HiddenRadioButton/HiddenRadioButton";
 import ErrorMessage from "../../../ui/ErrorMessage/ErrorMessage";
 import SetsDetails from "../SetsDetails/SetsDetails";
-import Set from "./Set/Set";
-import toast from "react-hot-toast";
 import { useAppSelector } from "../../../hooks/hooks";
 import { useAddWorkoutProgramMutation } from "../../../services/workoutApi";
 import { useParams } from "react-router-dom";
-import { ISetObject, DefaultValues } from "../../../interfaces/interfaces";
+import {
+  ISetObject,
+  DefaultValues,
+  SuperSetObject,
+} from "../../../interfaces/interfaces";
+import NewAddedSet from "./Set/NewAddedSet/NewAddedSet";
+import { FaFireFlameCurved, FaFireFlameSimple } from "react-icons/fa6";
+import PillShape from "../../../ui/PillShape/PillShape";
+import SuperSet from "../../../features/SuperSet/SuperSet";
 
 interface Props {
-  setShowModal?: (showModal: string) => void;
+  setShowModal?: () => void;
 }
 
 const defaultValues: DefaultValues = {
@@ -28,6 +34,7 @@ const defaultValues: DefaultValues = {
 
 function CreateWorkout({ setShowModal }: Props) {
   const {
+    unregister,
     register,
     clearErrors,
     handleSubmit,
@@ -36,23 +43,29 @@ function CreateWorkout({ setShowModal }: Props) {
     setValue,
     formState: { errors },
   } = useForm<DefaultValues>({
-    mode: "onChange",
     defaultValues,
+    mode: "onChange",
   });
 
   const formData = watch();
 
   const [sets, setSets] = useState<ISetObject[]>([]);
 
+  const [superSets, setSuperSets] = useState<SuperSetObject[]>([]);
+
   const [selectedSet, setSelectedSet] = useState<ISetObject>();
 
-  const [totalSets, setTotalSets] = useState<number>(0);
+  const [selectedSuperSet, setSelectedSuperSet] = useState<ISetObject>();
 
   const [weightUnit, setWeightUnit] = useState<string>("KG");
 
   const [showSetDetails, setShowSetDetails] = useState(false);
 
+  const [showSuperSetForm, setShowSuperSetForm] = useState<boolean>(false);
+
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
+
+  const areAllSuperSetsCompleted = superSets.every((set) => set.isCompleted);
 
   const { user } = useAppSelector((state) => state.authentication);
 
@@ -60,57 +73,72 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const { name } = useParams();
 
-  useEffect(() => {
-    if (formData.setsNumber >= 1 && formData.setsNumber > totalSets) {
-      const setObject: ISetObject = {
-        id: crypto.randomUUID(),
-        setsWeight: "",
-        setsReps: "",
-        isCompleted: false,
-        weightUnit: "",
-      };
-
-      setSets((sets) => [...sets, setObject]);
-
-      setTotalSets(formData.setsNumber);
-
-      //
-    } else if (formData.setsNumber < totalSets) {
-      //
-
-      const lastElement = sets[sets.length - 1];
-
-      setSets((set) => set.filter((set) => set.id !== lastElement.id));
-
-      setTotalSets(formData.setsNumber--);
-
-      //
-    }
-  }, [formData.setsNumber, totalSets, sets]);
+  console.log("FORMDATA ", formData);
 
   function onSubmit() {
-    if (!areAllSetsCompleted) {
-      toast.error("Please Fill All Sets Slots");
-      return;
-    }
+    const uncompletedElement = document.getElementsByClassName("not-complete");
 
-    addWorkoutProgram({
-      id: crypto.randomUUID(),
-      userId: user?.uid || user?.uuid,
-      sets: sets,
-      workoutName: formData.workoutName,
-      tragetedMuscle: formData.targetedMuscle,
-      workoutTime: new Date(Date.now()).toDateString(),
-      workoutCategory: name,
+    Array.from(uncompletedElement).forEach((set) => {
+      set.classList.add("check-sets");
     });
 
-    setShowModal("");
+    if (!areAllSetsCompleted || (!areAllSuperSetsCompleted && showSuperSetForm))
+      return;
+
+    if (formData.superSet) {
+      addWorkoutProgram({
+        id: crypto.randomUUID(),
+        userId: user?.uid || user?.uuid,
+        sets,
+        workoutName: formData.workoutName,
+        tragetedMuscle: formData.targetedMuscle,
+        superSetName: formData.superSet.superSetName,
+        superSets,
+        workoutTime: new Date(Date.now()).toDateString(),
+        workoutCategory: name,
+        workoutType: "superSet",
+      });
+    }
+
+    if (!formData.superSet) {
+      addWorkoutProgram({
+        id: crypto.randomUUID(),
+        userId: user?.uid || user?.uuid,
+        sets: sets,
+        workoutName: formData.workoutName,
+        tragetedMuscle: formData.targetedMuscle,
+        workoutTime: new Date(Date.now()).toDateString(),
+        workoutCategory: name,
+        workoutType: "basic",
+      });
+    }
+    setShowModal();
   }
 
   function addSet() {
     const setNumbersInput = document.getElementById(
       "setsNumber"
     )! as HTMLInputElement;
+
+    const setObject: ISetObject = {
+      id: crypto.randomUUID(),
+      setsWeight: "",
+      setsReps: "",
+      isCompleted: false,
+      weightUnit: "",
+    };
+
+    setSets((sets) => [...sets, setObject]);
+
+    const superSetObject: SuperSetObject = {
+      id: crypto.randomUUID(),
+      setsWeight: "",
+      setsReps: "",
+      isCompleted: false,
+      weightUnit: "",
+    };
+
+    setSuperSets((superSets) => [...superSets, superSetObject]);
 
     setValue("setsNumber", Number(setNumbersInput.value) + 1);
     clearErrors("setsNumber");
@@ -122,61 +150,39 @@ function CreateWorkout({ setShowModal }: Props) {
       "setsNumber"
     )! as HTMLInputElement;
 
+    const lastElement = sets[sets.length - 1];
+
+    setSets((set) => set.filter((set) => set.id !== lastElement.id));
+
+    const lastSuperElement = superSets[superSets.length - 1];
+
+    setSuperSets((set) => set.filter((set) => set.id !== lastSuperElement.id));
+
     setValue("setsNumber", Number(setNumbersInput.value) - 1);
+  }
+
+  function getScroll() {
+    setTimeout(() => {
+      const position = document.getElementById("super-set");
+
+      position.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 1000);
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-5xl font-extrabold">Add Workout</h2>
-      <Input
-        size="lg"
-        id="workoutName"
-        name="workoutName"
-        type="text"
-        placeholder="Workout Name"
-        register={register}
-        errors={errors}
-        validiationInputs={{
-          required: {
-            value: true,
-            message: "This Field is required",
-          },
-        }}
-      />
-      <div className="flex flex-col gap-7">
-        <h2 className="text-4xl font-extrabold mb-5">TARGETED MUSCLE:</h2>
-        <div className="flex gap-[3rem] items-center flex-wrap ">
-          {radioButtons.map((button) => (
-            <HiddenRadioButton
-              className={button.id === formData.targetedMuscle}
-              key={button.id}
-              label={button.label}
-              name={button.name}
-              id={button.id}
-              value={button.value}
-              register={register}
-              validiationInputs={{
-                required: {
-                  value: true,
-                  message: "",
-                },
-              }}
-            />
-          ))}
-        </div>
-        {errors.targetedMuscle && (
-          <ErrorMessage message="This Field is required" />
-        )}
-      </div>
-      <h2 className="text-4xl font-extrabold">Number of Sets :</h2>
-
-      <div className="flex items-center gap-[5rem] ">
+      <div className={styles["form__container"]}>
+        <h2 className="text-5xl font-extrabold">Add Workout</h2>
         <Input
-          size="md"
-          placeholder="NUM OF SETS:"
-          id="setsNumber"
-          name="setsNumber"
-          type="number"
+          size="lg"
+          id="workoutName"
+          name="workoutName"
+          type="text"
+          placeholder="Workout Name"
           register={register}
           errors={errors}
           validiationInputs={{
@@ -184,56 +190,161 @@ function CreateWorkout({ setShowModal }: Props) {
               value: true,
               message: "This Field is required",
             },
-            min: {
-              value: 1,
-              message: "Minimun sets number should be more than 1",
-            },
           }}
         />
-        <div className="flex items-center gap-10">
-          <Button type="button" size="sm" variation="primary" onClick={addSet}>
-            +
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variation="danger"
-            onClick={removeSet}
-          >
-            -
-          </Button>
+        <div className="flex flex-col gap-7">
+          <h2 className="text-4xl font-extrabold mb-5">TARGETED MUSCLE:</h2>
+          <div className="flex gap-[3rem] items-center flex-wrap ">
+            {radioButtons.map((button) => (
+              <HiddenRadioButton
+                className={button.id === formData.targetedMuscle}
+                key={button.id}
+                label={button.label}
+                name={button.name}
+                id={button.id}
+                value={button.value}
+                register={{
+                  ...register("targetedMuscle", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  }),
+                }}
+              />
+            ))}
+          </div>
+          {errors.targetedMuscle && (
+            <ErrorMessage message="This Field is required" />
+          )}
         </div>
-      </div>
-      <div className="flex items-center flex-wrap gap-[3rem]">
-        {sets.map((set) => (
-          <Set
-            key={set.id}
-            setSelectedSet={setSelectedSet}
-            handleShowSetDetailsModal={setShowSetDetails}
-            showSetDetailsModal={showSetDetails}
-            set={set}
-            sets={sets}
-          />
-        ))}
-      </div>
+        <h2 className="text-4xl font-extrabold">Number of Sets :</h2>
 
-      {showSetDetails && (
-        <SetsDetails
+        <div className="flex items-center gap-[5rem] ">
+          <Input
+            size="md"
+            placeholder="NUM OF SETS:"
+            id="setsNumber"
+            name="setsNumber"
+            type="number"
+            register={register}
+            errors={errors}
+            validiationInputs={{
+              required: {
+                value: true,
+                message: "This Field is required",
+              },
+              min: {
+                value: 1,
+                message: "Minimun sets number should be more than 1",
+              },
+            }}
+          />
+          <div className="flex items-center gap-10 ">
+            <Button
+              type="button"
+              size="sm"
+              variation="primary"
+              onClick={addSet}
+            >
+              +
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variation="danger"
+              onClick={removeSet}
+            >
+              -
+            </Button>
+          </div>
+        </div>
+
+        <div
+          id="sets-container"
+          className="flex items-center flex-wrap gap-[3rem]"
+        >
+          {sets.map((set) => (
+            <NewAddedSet
+              key={set.id}
+              setSelectedSet={setSelectedSet}
+              handleShowSetDetailsModal={setShowSetDetails}
+              showSetDetailsModal={showSetDetails}
+              set={set}
+              sets={sets}
+            />
+          ))}
+        </div>
+
+        {showSetDetails && (
+          <SetsDetails
+            resetField={resetField}
+            handleShowSetDetailsModal={setShowSetDetails}
+            errors={errors}
+            register={register}
+            sets={sets}
+            selectedSet={selectedSet}
+            formData={formData}
+            weightUnit={weightUnit}
+            setWeightUnit={setWeightUnit}
+          />
+        )}
+
+        <hr />
+
+        {!showSuperSetForm && (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-[3rem]">
+              <PillShape
+                onClick={() => {
+                  getScroll();
+                  setShowSuperSetForm(true);
+                }}
+                leftSideDesign="bg-blue-800 p-4 text-white self-stretch "
+                RightSideDesign="bg-slate-200 p-4 text-slate-800 font-bold "
+                leftSideContent={<FaFireFlameCurved />}
+                RightSideContent="Super Set"
+              />
+              <PillShape
+                // onClick={showSuperSetForm}
+                leftSideDesign="bg-blue-800 p-4 text-white self-stretch"
+                RightSideDesign="bg-slate-200 p-4 text-slate-800 font-bold "
+                leftSideContent={<FaFireFlameSimple />}
+                RightSideContent="Drop Set"
+              />
+            </div>
+            <div className="flex gap-5 basis-[30rem]">
+              <Button type="submit" variation="primary" size="md">
+                Add Workout
+              </Button>
+              <Button
+                type="button"
+                onClick={setShowModal}
+                variation="danger"
+                size="md"
+              >
+                cancel
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+      {showSuperSetForm && (
+        <SuperSet
+          setShowSuperSetForm={setShowSuperSetForm}
           resetField={resetField}
-          handleShowSetDetailsModal={setShowSetDetails}
-          errors={errors}
-          register={register}
-          sets={sets}
-          selectedSet={selectedSet}
-          formData={formData}
           weightUnit={weightUnit}
           setWeightUnit={setWeightUnit}
+          selectedSuperSet={selectedSuperSet}
+          superSets={superSets}
+          setSelectedSuperSet={setSelectedSuperSet}
+          register={register}
+          formData={formData}
+          setShowModal={setShowModal}
+          errors={errors}
+          unregister={unregister}
         />
       )}
-
-      <Button variation="primary" size="lg">
-        Add Workout
-      </Button>
     </form>
   );
 }

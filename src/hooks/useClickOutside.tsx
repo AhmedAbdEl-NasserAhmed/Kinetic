@@ -10,8 +10,6 @@ function useClickOutside({ close, StopBubbling }: Props) {
 
   useEffect(() => {
     function handler(e: Event) {
-      console.log(ref.current && !ref.current.contains(e.target as Node));
-
       if (ref.current && !ref.current.contains(e.target as Node)) {
         close("");
         document.body.classList.remove("stop-scrolling");

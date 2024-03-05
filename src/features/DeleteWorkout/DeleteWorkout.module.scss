@@ -1,0 +1,10 @@
+.delete-workout {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  width: min(50vw, 40rem);
+  padding: min(2vw, 6rem);
+  background-color: var(--color-white);
+  border-radius: 10px;
+  text-align: center;
+}

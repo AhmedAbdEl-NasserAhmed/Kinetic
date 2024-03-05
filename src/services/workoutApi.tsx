@@ -1,6 +1,7 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
+import { useAddWorkout } from "../hooks/useAddWorkout";
 import useGetWorkout from "../hooks/useGetWorkout";
-import useUpdateWorkout from "../hooks/useUpdateWorkout";
+import { useDeleteWorkout } from "../hooks/useDeleteWorkout";
 
 export const workoutApi = createApi({
   reducerPath: "workoutApi",
@@ -12,11 +13,18 @@ export const workoutApi = createApi({
       providesTags: ["workouts"],
     }),
     addWorkoutProgram: builder.mutation({
-      queryFn: useUpdateWorkout,
+      queryFn: useAddWorkout,
+      invalidatesTags: ["workouts"],
+    }),
+    deleteWorkout: builder.mutation({
+      queryFn: useDeleteWorkout,
       invalidatesTags: ["workouts"],
     }),
   }),
 });
 
-export const { useFetchWorkoutsQuery, useAddWorkoutProgramMutation } =
-  workoutApi;
+export const {
+  useFetchWorkoutsQuery,
+  useAddWorkoutProgramMutation,
+  useDeleteWorkoutMutation,
+} = workoutApi;

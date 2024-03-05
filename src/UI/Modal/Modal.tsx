@@ -6,29 +6,28 @@ import useClickOutside from "../../hooks/useClickOutside";
 interface ModalContext {
   openName: string;
   close: (openName: string) => void;
-  open: (openName: string) => void;
+  openModal: (openName: string) => void;
 }
 
 const ModalContext = createContext({} as ModalContext);
 
 function Modal({ children }) {
   const [openName, setopenName] = useState("");
-
   const close = () => setopenName("");
 
-  const open = setopenName;
+  const openModal = setopenName;
 
   return (
-    <ModalContext.Provider value={{ openName, close, open }}>
+    <ModalContext.Provider value={{ openName, close, openModal }}>
       {children}
     </ModalContext.Provider>
   );
 }
 
 function Open({ children, opens: modalWindowName }) {
-  const { open } = useContext(ModalContext);
+  const { openModal } = useContext(ModalContext);
 
-  return cloneElement(children, { onClick: () => open(modalWindowName) });
+  return cloneElement(children, { onClick: () => openModal(modalWindowName) });
 }
 
 function Window({ children, name }) {

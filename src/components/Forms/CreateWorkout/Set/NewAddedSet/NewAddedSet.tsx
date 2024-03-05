@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import styles from "./Set.module.scss";
+import styles from "./NewAddedSet.module.scss";
 
-function Set({
+function NewAddedSet({
   set,
   handleShowSetDetailsModal,
   setSelectedSet,
@@ -23,8 +23,10 @@ function Set({
         handleShowSetDetailsModal(isPrevious);
       }}
       className={`${styles["set"]} ${
-        isPrevious ? "bg-slate-100" : "bg-red-500"
-      }  `}
+        isPrevious
+          ? `bg-slate-100 ${set.isCompleted ? "" : "not-complete"}`
+          : "bg-red-500 not-complete "
+      }`}
     >
       {set.setsReps > 0 && <h2>{set.setsReps}</h2>}
       {set.setsWeight > 0 && (
@@ -37,4 +39,4 @@ function Set({
   );
 }
 
-export default Set;
+export default NewAddedSet;

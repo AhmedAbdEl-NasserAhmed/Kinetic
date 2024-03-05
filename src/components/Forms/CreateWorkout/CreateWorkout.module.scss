@@ -1,12 +1,18 @@
 .form {
   position: relative;
-  padding: 2.5rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 4rem;
   background-color: var(--color-white);
   border-radius: 10px;
-  width: 50vw;
+  width: 60vw;
   height: 80vh;
   overflow-y: scroll;
+
+  &__container {
+    padding: 2.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
 }

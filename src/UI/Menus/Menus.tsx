@@ -4,6 +4,12 @@ import { HiEllipsisVertical } from "react-icons/hi2";
 import styles from "./Menus.module.scss";
 import useClickOutside from "../../hooks/useClickOutside";
 
+interface MenusButton {
+  children: React.ReactNode;
+  onClick?: () => void;
+  icon: React.ReactElement;
+}
+
 interface PositionObject {
   x: number;
   y: number;
@@ -44,16 +50,6 @@ function Menu({ children }) {
 function Toggle({ id }) {
   const { openId, close, setPosition, openHandler } = useContext(MenusContext);
 
-  function removeScrollingOpenMenu() {
-    document.body.classList.add("stop-scrolling");
-    openHandler(id);
-  }
-
-  function addScrollingCloseMenu() {
-    document.body.classList.remove("stop-scrolling");
-    close("");
-  }
-
   function handleClick(e) {
     e.stopPropagation();
 
@@ -64,11 +60,7 @@ function Toggle({ id }) {
       y: rect.y + rect.height - 15,
     });
 
-    console.log("openId", openId);
-
-    openId === "" || openId !== id
-      ? removeScrollingOpenMenu()
-      : addScrollingCloseMenu();
+    openId === "" || openId !== id ? openHandler(id) : close("");
   }
 
   return (
@@ -82,6 +74,12 @@ function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
 
   const menuRef = useClickOutside({ close, StopBubbling: false });
+
+  function hanldeScrolling() {
+    close("");
+  }
+
+  window.addEventListener("scroll", hanldeScrolling);
 
   if (openId !== id) return null;
 
@@ -97,22 +95,21 @@ function List({ id, children }) {
   );
 }
 
-function MenusButton({ children, icon }) {
+function MenusButton({ children, onClick, icon }: MenusButton) {
   const { close } = useContext(MenusContext);
 
+  function handleClick() {
+    onClick();
+    close("");
+  }
+
   return (
-    <div>
-      <button
-        className={styles["menus__button"]}
-        onClick={() => {
-          document.body.classList.remove("stop-scrolling");
-          close("");
-        }}
-      >
+    <li>
+      <button onClick={handleClick} className={styles["menus__button"]}>
         {icon}
         <span>{children}</span>
       </button>
-    </div>
+    </li>
   );
 }
 

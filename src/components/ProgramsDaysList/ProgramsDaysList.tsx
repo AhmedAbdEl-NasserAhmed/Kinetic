@@ -17,7 +17,8 @@ function ProgramsDaysList() {
 
   const selectedProgramDays = data?.find((program) => program.id === id)?.days;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return <Spinner borderColor="bg-blue-800" width="46" height="46" />;
 
   if (!selectedProgramDays)
     return (

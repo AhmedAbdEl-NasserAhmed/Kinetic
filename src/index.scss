@@ -21,7 +21,7 @@ body {
 
 :root {
   --dark-blue: #081015;
-  --dark-blue-50: rgb(30 64 175);
+  --dark-blue-50: #1e40af;
   --color-white: white;
   --color-grey-10: #eaebed;
   --color-grey-20: #b1b1b1;
@@ -32,7 +32,28 @@ body {
   width: 100% !important;
 }
 
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden;
+.check-sets {
+  animation: shaking 0.5s linear 0.5s infinite alternate;
+}
+
+@keyframes shaking {
+  0% {
+    transform: translateX(2px);
+  }
+
+  25% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    transform: translateX(2px);
+  }
 }

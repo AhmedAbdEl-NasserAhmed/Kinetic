@@ -7,7 +7,8 @@ import ProgramItem from "./ProgramItem/ProgramItem";
 function ProgramsList() {
   const { data, isLoading } = useFetchProgramsQuery("programs");
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return <Spinner borderColor="#1e40af" width="46" height="46" margin="15" />;
 
   return (
     <div className={styles.programs}>

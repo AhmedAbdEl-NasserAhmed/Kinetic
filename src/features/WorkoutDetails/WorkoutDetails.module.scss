@@ -1,0 +1,9 @@
+.workout-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  width: min(50vw, 80rem);
+  padding: min(2vw, 6rem);
+  background-color: var(--color-white);
+  border-radius: 10px;
+}
