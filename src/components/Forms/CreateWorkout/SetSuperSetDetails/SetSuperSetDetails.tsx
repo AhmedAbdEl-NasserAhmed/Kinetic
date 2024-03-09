@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import Button from "../../../ui/Button/Button";
-import Input from "../../../ui/Input/Input";
-import styles from "./SetSuperSetDetails.module.scss";
-import { ISetObject } from "../../../interfaces/interfaces";
+import Input from "../../../../ui/Input/Input";
+import { ISetObject } from "../../../../interfaces/interfaces";
+import styles from "./SetSuperSetDetails.module.css";
+import Button from "../../../../ui/Button/Button";
 
 function SetSuperSetDetails({
   register,

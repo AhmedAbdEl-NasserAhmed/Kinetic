@@ -1,16 +1,16 @@
-import styles from "./SuperSetWorkoutItem.module.scss";
+import styles from "./DropSetWorkoutItem.module.scss";
 import { HiMiniEye, HiMiniPencilSquare, HiTrash } from "react-icons/hi2";
-import { WorkoutObject } from "../../interfaces/interfaces";
-import Menus from "../../ui/Menus/Menus";
-import Modal from "../../ui/Modal/Modal";
-import DeleteWorkout from "../../features/DeleteWorkout/DeleteWorkout";
-import { FaFireFlameCurved } from "react-icons/fa6";
+import { WorkoutObject } from "../../../interfaces/interfaces";
+import Menus from "../../../ui/Menus/Menus";
+import Modal from "../../../ui/Modal/Modal";
+import DeleteWorkout from "../../DeleteWorkout/DeleteWorkout";
+import { FaFireFlameSimple } from "react-icons/fa6";
 
 interface Props {
   workout: WorkoutObject;
 }
 
-function SuperSetWorkoutItem({ workout }: Props) {
+function DropSetWorkoutItem({ workout }: Props) {
   const totalReps = workout.sets.reduce(
     (acc, set) => acc + Number(set["setsReps"]),
     0
@@ -20,23 +20,24 @@ function SuperSetWorkoutItem({ workout }: Props) {
     (acc, set) => acc + Number(set["setsWeight"]),
     0
   );
-  const totalSuperSetReps = workout.superSets.reduce(
+  const totalDropSetReps = workout.dropSets.reduce(
     (acc, set) => acc + Number(set["setsReps"]),
     0
   );
 
-  const totalSuperSetWeights = workout.superSets.reduce(
+  const totalDropSetWeights = workout.dropSets.reduce(
     (acc, set) => acc + Number(set["setsWeight"]),
     0
   );
 
   return (
-    <li className={styles["superSet-container"]}>
-      <span className={styles["superSet-container__icon"]}>
-        <FaFireFlameCurved />
+    <li className={styles["dropSet-container"]}>
+      <span className={styles["dropSet-container__icon"]}>
+        <h2>Drop Set</h2>
+        <FaFireFlameSimple />
       </span>
       <div className="flex flex-col  gap-3">
-        <div className={styles["superSet-container__normal-set"]}>
+        <div className={styles["dropSet-container__normal-set"]}>
           <div>
             <h2 className="text-[4rem] font-extrabold mb-[2rem]">
               {workout.workoutName}
@@ -83,28 +84,25 @@ function SuperSetWorkoutItem({ workout }: Props) {
             </Menus.Menu>
           </Modal>
         </div>
-        <div className={styles["superSet-container__extra-set"]}>
+        <div className={styles["dropSet-container__extra-set"]}>
           <div>
-            <h2 className="text-[4rem] font-extrabold mb-[2rem] text-blue-800">
-              {workout.superSetName}
-            </h2>
             <div className="flex gap-10">
               <span>
                 Sets :{" "}
                 <span className="text-blue-800">
                   {" "}
-                  {workout.superSets.length}
+                  {workout.dropSets.length}
                 </span>
               </span>
               <span>
                 {" "}
                 Total Reps:{" "}
-                <span className="text-blue-800"> {totalSuperSetReps}</span>
+                <span className="text-blue-800"> {totalDropSetReps}</span>
               </span>
               <span>
                 {" "}
                 Total Weight Lifted:{" "}
-                <span className="text-blue-800"> {totalSuperSetWeights}</span>
+                <span className="text-blue-800"> {totalDropSetWeights}</span>
               </span>
             </div>
           </div>
@@ -114,4 +112,4 @@ function SuperSetWorkoutItem({ workout }: Props) {
   );
 }
 
-export default SuperSetWorkoutItem;
+export default DropSetWorkoutItem;

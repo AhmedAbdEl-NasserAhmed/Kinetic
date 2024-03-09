@@ -10,15 +10,13 @@ import SetsDetails from "../SetsDetails/SetsDetails";
 import { useAppSelector } from "../../../hooks/hooks";
 import { useAddWorkoutProgramMutation } from "../../../services/workoutApi";
 import { useParams } from "react-router-dom";
-import {
-  ISetObject,
-  DefaultValues,
-  SuperSetObject,
-} from "../../../interfaces/interfaces";
+import { ISetObject, DefaultValues } from "../../../interfaces/interfaces";
 import NewAddedSet from "./Set/NewAddedSet/NewAddedSet";
 import { FaFireFlameCurved, FaFireFlameSimple } from "react-icons/fa6";
 import PillShape from "../../../ui/PillShape/PillShape";
 import SuperSet from "../../../features/SuperSet/SuperSet";
+import DropSet from "../../../features/DropSet/DropSet";
+import { getScroll } from "../../../helpers/getScroll";
 
 interface Props {
   setShowModal?: () => void;
@@ -51,17 +49,23 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const [sets, setSets] = useState<ISetObject[]>([]);
 
-  const [superSets, setSuperSets] = useState<SuperSetObject[]>([]);
+  const [superSets, setSuperSets] = useState<ISetObject[]>([]);
+
+  const [dropSets, setDropSets] = useState<ISetObject[]>([]);
 
   const [selectedSet, setSelectedSet] = useState<ISetObject>();
 
   const [selectedSuperSet, setSelectedSuperSet] = useState<ISetObject>();
+
+  const [selectedDropSet, setSelectedDropSet] = useState<ISetObject>();
 
   const [weightUnit, setWeightUnit] = useState<string>("KG");
 
   const [showSetDetails, setShowSetDetails] = useState(false);
 
   const [showSuperSetForm, setShowSuperSetForm] = useState<boolean>(false);
+
+  const [showDropSetForm, setShowDropSetForm] = useState<boolean>(false);
 
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
@@ -72,8 +76,6 @@ function CreateWorkout({ setShowModal }: Props) {
   const [addWorkoutProgram] = useAddWorkoutProgramMutation();
 
   const { name } = useParams();
-
-  console.log("FORMDATA ", formData);
 
   function onSubmit() {
     const uncompletedElement = document.getElementsByClassName("not-complete");
@@ -100,7 +102,21 @@ function CreateWorkout({ setShowModal }: Props) {
       });
     }
 
-    if (!formData.superSet) {
+    if (formData.dropSet) {
+      addWorkoutProgram({
+        id: crypto.randomUUID(),
+        userId: user?.uid || user?.uuid,
+        sets,
+        workoutName: formData.workoutName,
+        tragetedMuscle: formData.targetedMuscle,
+        dropSets,
+        workoutTime: new Date(Date.now()).toDateString(),
+        workoutCategory: name,
+        workoutType: "dropSet",
+      });
+    }
+
+    if (!formData.superSet && !formData.dropSet) {
       addWorkoutProgram({
         id: crypto.randomUUID(),
         userId: user?.uid || user?.uuid,
@@ -130,7 +146,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
     setSets((sets) => [...sets, setObject]);
 
-    const superSetObject: SuperSetObject = {
+    const superSetObject: ISetObject = {
       id: crypto.randomUUID(),
       setsWeight: "",
       setsReps: "",
@@ -161,17 +177,7 @@ function CreateWorkout({ setShowModal }: Props) {
     setValue("setsNumber", Number(setNumbersInput.value) - 1);
   }
 
-  function getScroll() {
-    setTimeout(() => {
-      const position = document.getElementById("super-set");
-
-      position.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "nearest",
-      });
-    }, 1000);
-  }
+  console.log("FormData", formData);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -292,12 +298,12 @@ function CreateWorkout({ setShowModal }: Props) {
 
         <hr />
 
-        {!showSuperSetForm && (
+        {!showSuperSetForm && !showDropSetForm && (
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-[3rem]">
               <PillShape
                 onClick={() => {
-                  getScroll();
+                  getScroll("super-set");
                   setShowSuperSetForm(true);
                 }}
                 leftSideDesign="bg-blue-800 p-4 text-white self-stretch "
@@ -306,7 +312,10 @@ function CreateWorkout({ setShowModal }: Props) {
                 RightSideContent="Super Set"
               />
               <PillShape
-                // onClick={showSuperSetForm}
+                onClick={() => {
+                  getScroll("drop-set");
+                  setShowDropSetForm(true);
+                }}
                 leftSideDesign="bg-blue-800 p-4 text-white self-stretch"
                 RightSideDesign="bg-slate-200 p-4 text-slate-800 font-bold "
                 leftSideContent={<FaFireFlameSimple />}
@@ -329,6 +338,7 @@ function CreateWorkout({ setShowModal }: Props) {
           </div>
         )}
       </div>
+
       {showSuperSetForm && (
         <SuperSet
           setShowSuperSetForm={setShowSuperSetForm}
@@ -343,6 +353,26 @@ function CreateWorkout({ setShowModal }: Props) {
           setShowModal={setShowModal}
           errors={errors}
           unregister={unregister}
+        />
+      )}
+
+      {showDropSetForm && (
+        <DropSet
+          setValue={setValue}
+          clearErrors={clearErrors}
+          setShowDropSetForm={setShowDropSetForm}
+          resetField={resetField}
+          weightUnit={weightUnit}
+          setWeightUnit={setWeightUnit}
+          selectedDropSet={selectedDropSet}
+          dropSets={dropSets}
+          setSelectedDropSet={setSelectedDropSet}
+          register={register}
+          formData={formData}
+          setShowModal={setShowModal}
+          errors={errors}
+          unregister={unregister}
+          setDropSets={setDropSets}
         />
       )}
     </form>

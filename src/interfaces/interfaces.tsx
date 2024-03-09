@@ -6,14 +6,6 @@ export interface ISetObject {
   weightUnit: string;
 }
 
-export interface SuperSetObject {
-  id: string;
-  setsWeight: string;
-  setsReps: string;
-  isCompleted: boolean;
-  weightUnit: string;
-}
-
 export interface DefaultValues {
   workoutName?: string;
   setsNumber?: number;
@@ -25,6 +17,10 @@ export interface DefaultValues {
     setsSuperSetReps: string;
     setsSuperSetWeight: string;
     superSetName: string;
+  };
+  dropSet?: {
+    setsDropSetReps: string;
+    setsDropSetWeight: string;
   };
 }
 
@@ -38,5 +34,6 @@ export interface WorkoutObject {
   workoutCategory: string;
   workoutType: string;
   superSetName?: string;
-  superSets?: SuperSetObject[];
+  superSets?: ISetObject[];
+  dropSets?: ISetObject[];
 }

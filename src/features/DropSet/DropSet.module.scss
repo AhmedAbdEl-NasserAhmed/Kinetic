@@ -1,0 +1,15 @@
+.dropSet {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  padding: 3rem 5rem;
+  background-color: var(--color-grey-10);
+  height: 120vh;
+
+  &__icon {
+    font-size: 4rem;
+    cursor: pointer;
+    color: var(--dark-blue-50);
+    transform: translateY(-25px);
+  }
+}
