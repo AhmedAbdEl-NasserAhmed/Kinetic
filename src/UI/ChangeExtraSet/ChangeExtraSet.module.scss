@@ -1,0 +1,23 @@
+.change-sets {
+  display: flex;
+  align-items: center;
+  color: var(--color-white);
+  font-size: 1.8rem;
+  width: 10rem;
+  height: 4rem;
+  background-color: transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid var(--dark-blue-50);
+  transition: 0.5s all;
+
+  &__super-set,
+  &__drop-set {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-basis: 50%;
+    cursor: pointer;
+  }
+}

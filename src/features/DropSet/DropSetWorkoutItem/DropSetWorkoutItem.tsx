@@ -3,7 +3,7 @@ import { HiMiniEye, HiMiniPencilSquare, HiTrash } from "react-icons/hi2";
 import { WorkoutObject } from "../../../interfaces/interfaces";
 import Menus from "../../../ui/Menus/Menus";
 import Modal from "../../../ui/Modal/Modal";
-import DeleteWorkout from "../../DeleteWorkout/DeleteWorkout";
+import DeleteWorkout from "../../../components/DeleteWorkout/DeleteWorkout";
 import { FaFireFlameSimple } from "react-icons/fa6";
 
 interface Props {

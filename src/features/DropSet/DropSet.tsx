@@ -6,6 +6,7 @@ import styles from "./DropSet.module.scss";
 import { FaAnglesUp } from "react-icons/fa6";
 import { ISetObject } from "../../interfaces/interfaces";
 import SetDropSetDetails from "../../components/Forms/SetDropSetDetails/SetDropSetDetails";
+import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
 
 function DropSet({
   unregister,
@@ -23,6 +24,9 @@ function DropSet({
   setDropSets,
   setValue,
   clearErrors,
+  toggleSets,
+  setToggleSets,
+  setShowSuperSetForm,
 }) {
   const [showDropSetDetails, setShowDropSetDetails] = useState<boolean>(false);
 
@@ -63,20 +67,29 @@ function DropSet({
   return (
     <div id="drop-set" className={styles["dropSet"]}>
       <div className="flex items-center justify-between">
-        <h2 className="text-[4.5rem] font-extrabold text-blue-800 mb-10">
+        <h2 className="text-[4.5rem] font-extrabold text-blue-800 ">
           Drop Set
         </h2>
-        <span
-          onClick={() => {
-            unregister("dropSet");
-            unregister("dropSetsNumber");
-            setDropSets([]);
-            setShowDropSetForm(false);
-          }}
-          className={styles["dropSet__icon"]}
-        >
-          <FaAnglesUp />
-        </span>
+        <div className={styles["toggle-sets"]}>
+          <ChangeExtraSet
+            setShowSuperSetForm={setShowSuperSetForm}
+            setShowDropSetForm={setShowDropSetForm}
+            setToggleSets={setToggleSets}
+            activeSet={toggleSets}
+          />
+
+          <span
+            onClick={() => {
+              unregister("dropSet");
+              unregister("dropSetsNumber");
+              setDropSets([]);
+              setShowDropSetForm(false);
+            }}
+            className={styles["dropSet__icon"]}
+          >
+            <FaAnglesUp />
+          </span>
+        </div>
       </div>
 
       <h2 className="text-3xl font-semibold">

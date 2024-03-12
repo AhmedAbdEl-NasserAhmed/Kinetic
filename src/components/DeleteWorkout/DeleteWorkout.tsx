@@ -33,9 +33,9 @@ function DeleteWorkout({ workout, setShowModal }: Props) {
           disabled={response.isLoading}
           onClick={setShowModal}
           variation="secondary"
-          size="sm"
+          size="md"
         >
-          cancel
+          Cancel
         </Button>
       </div>
     </div>

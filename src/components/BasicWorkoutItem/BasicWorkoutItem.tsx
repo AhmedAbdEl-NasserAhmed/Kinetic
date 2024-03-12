@@ -5,7 +5,7 @@ import WorkoutDetails from "../../features/WorkoutDetails/WorkoutDetails";
 import Menus from "../../ui/Menus/Menus";
 import Modal from "../../ui/Modal/Modal";
 import styles from "./BasicWorkoutItem.module.scss";
-import DeleteWorkout from "../../features/DeleteWorkout/DeleteWorkout";
+import DeleteWorkout from "../DeleteWorkout/DeleteWorkout";
 
 interface Props {
   workout: WorkoutObject;

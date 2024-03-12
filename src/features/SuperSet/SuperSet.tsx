@@ -5,6 +5,7 @@ import styles from "./SuperSet.module.scss";
 import SetSuperSetDetails from "../../components/Forms/SetSuperSetDetails/SetSuperSetDetails";
 import Button from "../../ui/Button/Button";
 import { FaAnglesUp } from "react-icons/fa6";
+import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
 
 function SuperSet({
   unregister,
@@ -19,6 +20,9 @@ function SuperSet({
   setWeightUnit,
   setShowModal,
   setShowSuperSetForm,
+  toggleSets,
+  setToggleSets,
+  setShowDropSetForm,
 }) {
   const [showSuperSetDetails, setShowSuperSetDetails] = useState(false);
 
@@ -34,19 +38,27 @@ function SuperSet({
   return (
     <div id="super-set" className={styles["superSet"]}>
       <div className="flex items-center justify-between">
-        <h2 className="text-[4.5rem] font-extrabold text-blue-800 mb-10">
+        <h2 className="text-[4.5rem] font-extrabold text-blue-800 ">
           Super Set
         </h2>
-        <span
-          onClick={() => {
-            unregister("superSet");
-            clearSuperSets();
-            setShowSuperSetForm(false);
-          }}
-          className={styles["superSet__icon"]}
-        >
-          <FaAnglesUp />
-        </span>
+        <div className={styles["toggle-sets"]}>
+          <ChangeExtraSet
+            setShowDropSetForm={setShowDropSetForm}
+            setShowSuperSetForm={setShowSuperSetForm}
+            setToggleSets={setToggleSets}
+            activeSet={toggleSets}
+          />
+          <span
+            onClick={() => {
+              unregister("superSet");
+              clearSuperSets();
+              setShowSuperSetForm(false);
+            }}
+            className={styles["superSet__icon"]}
+          >
+            <FaAnglesUp />
+          </span>
+        </div>
       </div>
       <Input
         id="superSetName"

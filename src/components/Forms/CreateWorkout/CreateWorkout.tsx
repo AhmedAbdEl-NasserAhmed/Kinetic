@@ -67,6 +67,8 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const [showDropSetForm, setShowDropSetForm] = useState<boolean>(false);
 
+  const [toggleSets, setToggleSets] = useState("");
+
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
   const areAllSuperSetsCompleted = superSets.every((set) => set.isCompleted);
@@ -177,7 +179,7 @@ function CreateWorkout({ setShowModal }: Props) {
     setValue("setsNumber", Number(setNumbersInput.value) - 1);
   }
 
-  console.log("FormData", formData);
+  // console.log("FormData", formData);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -305,6 +307,7 @@ function CreateWorkout({ setShowModal }: Props) {
                 onClick={() => {
                   getScroll("super-set");
                   setShowSuperSetForm(true);
+                  setToggleSets("superSet");
                 }}
                 leftSideDesign="bg-blue-800 p-4 text-white self-stretch "
                 RightSideDesign="bg-slate-200 p-4 text-slate-800 font-bold "
@@ -315,6 +318,7 @@ function CreateWorkout({ setShowModal }: Props) {
                 onClick={() => {
                   getScroll("drop-set");
                   setShowDropSetForm(true);
+                  setToggleSets("dropSet");
                 }}
                 leftSideDesign="bg-blue-800 p-4 text-white self-stretch"
                 RightSideDesign="bg-slate-200 p-4 text-slate-800 font-bold "
@@ -341,6 +345,8 @@ function CreateWorkout({ setShowModal }: Props) {
 
       {showSuperSetForm && (
         <SuperSet
+          setToggleSets={setToggleSets}
+          toggleSets={toggleSets}
           setShowSuperSetForm={setShowSuperSetForm}
           resetField={resetField}
           weightUnit={weightUnit}
@@ -353,11 +359,15 @@ function CreateWorkout({ setShowModal }: Props) {
           setShowModal={setShowModal}
           errors={errors}
           unregister={unregister}
+          setShowDropSetForm={setShowDropSetForm}
         />
       )}
 
       {showDropSetForm && (
         <DropSet
+          setToggleSets={setToggleSets}
+          setShowSuperSetForm={setShowSuperSetForm}
+          toggleSets={toggleSets}
           setValue={setValue}
           clearErrors={clearErrors}
           setShowDropSetForm={setShowDropSetForm}

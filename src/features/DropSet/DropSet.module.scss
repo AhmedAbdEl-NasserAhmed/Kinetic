@@ -10,6 +10,11 @@
     font-size: 4rem;
     cursor: pointer;
     color: var(--dark-blue-50);
-    transform: translateY(-25px);
   }
+}
+
+.toggle-sets {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
