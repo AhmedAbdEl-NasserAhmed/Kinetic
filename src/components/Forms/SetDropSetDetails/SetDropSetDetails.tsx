@@ -21,8 +21,6 @@ function SetDropSetDetails({
     (dropSet: ISetObject) => dropSet.id === selectedDropSet.id
   );
 
-  console.log("dropSets", dropSets);
-
   function modifyDropSet() {
     chosenDropSet.setsWeight = +formData.dropSet?.setsDropSetWeight;
 

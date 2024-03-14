@@ -6,6 +6,7 @@ import SetSuperSetDetails from "../../components/Forms/SetSuperSetDetails/SetSup
 import Button from "../../ui/Button/Button";
 import { FaAnglesUp } from "react-icons/fa6";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
+import { scollMainContainer } from "../../helpers/getScroll";
 
 function SuperSet({
   unregister,
@@ -47,12 +48,14 @@ function SuperSet({
             setShowSuperSetForm={setShowSuperSetForm}
             setToggleSets={setToggleSets}
             activeSet={toggleSets}
+            unregister={unregister}
           />
           <span
             onClick={() => {
               unregister("superSet");
               clearSuperSets();
               setShowSuperSetForm(false);
+              scollMainContainer();
             }}
             className={styles["superSet__icon"]}
           >

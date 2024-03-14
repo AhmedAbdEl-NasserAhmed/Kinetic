@@ -6,6 +6,8 @@ interface Props {
   setToggleSets: (setName: string) => void;
   setShowSuperSetForm?: (boolen: boolean) => void;
   setShowDropSetForm?: (boolen: boolean) => void;
+  unregister?: (setName: string) => void;
+  setDropSets?: (dropSets: []) => void;
 }
 
 function ChangeExtraSet({
@@ -13,6 +15,8 @@ function ChangeExtraSet({
   setToggleSets,
   setShowSuperSetForm,
   setShowDropSetForm,
+  unregister,
+  setDropSets,
 }: Props) {
   return (
     <div className={styles["change-sets"]}>
@@ -21,6 +25,9 @@ function ChangeExtraSet({
           setShowSuperSetForm(true);
           setShowDropSetForm(false);
           setToggleSets("superSet");
+          unregister("dropSet");
+          unregister("dropSetsNumber");
+          setDropSets([]);
         }}
         className={`${styles["change-sets__super-set"]} ${
           activeSet === "superSet" ? "activeSet" : ""
@@ -33,6 +40,7 @@ function ChangeExtraSet({
           setShowDropSetForm(true);
           setShowSuperSetForm(false);
           setToggleSets("dropSet");
+          unregister("superSet");
         }}
         className={`${styles["change-sets__drop-set"]} ${
           activeSet === "dropSet" ? "activeSet" : ""

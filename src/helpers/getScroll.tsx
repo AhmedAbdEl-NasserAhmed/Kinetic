@@ -1,4 +1,16 @@
 export function getScroll(scrollableContainer: string) {
+  const workoutContainer = document.getElementById(
+    "create-workout"
+  )! as HTMLFormElement;
+
+  setTimeout(() => {
+    workoutContainer.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+  }, 100);
+
   setTimeout(() => {
     const position = document.getElementById(scrollableContainer);
 
@@ -7,5 +19,19 @@ export function getScroll(scrollableContainer: string) {
       block: "end",
       inline: "nearest",
     });
-  }, 1000);
+  }, 500);
+}
+
+export function scollMainContainer() {
+  setTimeout(() => {
+    const workoutContainer = document.getElementById(
+      "create-workout"
+    )! as HTMLFormElement;
+
+    workoutContainer.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+  }, 100);
 }

@@ -3,11 +3,11 @@ import { useFetchWorkoutsQuery } from "../../services/workoutApi";
 import { useParams } from "react-router-dom";
 import Spinner from "../../ui/Spinner/Spinner";
 import Container from "../../ui/Container/Container";
-import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import WorkoutsList from "./WorkoutsList/WorkoutsList";
 import Menus from "../../ui/Menus/Menus";
+import DateSlider from "../../ui/DateSlider/DateSlider";
 
-function WorkoutsDashboard() {
+function WorkoutsDashboard({ today, currentDateIndex, setCurrentDateIndex }) {
   const { user } = useAppSelector((state) => state.authentication);
 
   const { name } = useParams();
@@ -22,14 +22,15 @@ function WorkoutsDashboard() {
 
   return (
     <div>
-      <div className=" bg-gray-300 text-3xl px-5 py-5 flex items-center justify-between">
-        <span>{<HiArrowLeft />}</span>
-        <p>Today</p>
-        <span>{<HiArrowRight />}</span>
-      </div>
+      <DateSlider
+        currentDateIndex={currentDateIndex}
+        setCurrentDateIndex={setCurrentDateIndex}
+        data={data}
+        today={today}
+      />
       <Container>
         <Menus>
-          <WorkoutsList workouts={data} />
+          <WorkoutsList currentDateIndex={currentDateIndex} workouts={data} />
         </Menus>
       </Container>
     </div>

@@ -7,6 +7,7 @@ import { FaAnglesUp } from "react-icons/fa6";
 import { ISetObject } from "../../interfaces/interfaces";
 import SetDropSetDetails from "../../components/Forms/SetDropSetDetails/SetDropSetDetails";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
+import { scollMainContainer } from "../../helpers/getScroll";
 
 function DropSet({
   unregister,
@@ -76,6 +77,8 @@ function DropSet({
             setShowDropSetForm={setShowDropSetForm}
             setToggleSets={setToggleSets}
             activeSet={toggleSets}
+            unregister={unregister}
+            setDropSets={setDropSets}
           />
 
           <span
@@ -84,6 +87,7 @@ function DropSet({
               unregister("dropSetsNumber");
               setDropSets([]);
               setShowDropSetForm(false);
+              scollMainContainer();
             }}
             className={styles["dropSet__icon"]}
           >

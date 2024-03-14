@@ -5,6 +5,7 @@ import Menus from "../../../ui/Menus/Menus";
 import Modal from "../../../ui/Modal/Modal";
 import DeleteWorkout from "../../../components/DeleteWorkout/DeleteWorkout";
 import { FaFireFlameSimple } from "react-icons/fa6";
+import WorkoutDetails from "../../WorkoutDetails/WorkoutDetails";
 
 interface Props {
   workout: WorkoutObject;
@@ -77,6 +78,10 @@ function DropSetWorkoutItem({ workout }: Props) {
                   <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
                 </Modal.Open>
               </Menus.List>
+
+              <Modal.Window name="details">
+                <WorkoutDetails workout={workout} />
+              </Modal.Window>
 
               <Modal.Window name="delete">
                 <DeleteWorkout workout={workout} />

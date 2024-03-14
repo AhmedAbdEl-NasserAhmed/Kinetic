@@ -1,5 +1,5 @@
 import styles from "./CreateWorkout.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { radioButtons } from "../../../constants/RadioButtons";
 import Input from "../../../ui/Input/Input";
@@ -78,6 +78,8 @@ function CreateWorkout({ setShowModal }: Props) {
   const [addWorkoutProgram] = useAddWorkoutProgramMutation();
 
   const { name } = useParams();
+
+  console.log("FORM - DATA", formData);
 
   function onSubmit() {
     const uncompletedElement = document.getElementsByClassName("not-complete");
@@ -181,9 +183,25 @@ function CreateWorkout({ setShowModal }: Props) {
 
   // console.log("FormData", formData);
 
+  useEffect(() => {
+    const workoutContainer = document.getElementById(
+      "create-workout"
+    )! as HTMLFormElement;
+
+    if (!workoutContainer) return;
+
+    setTimeout(() => {
+      workoutContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 1000);
+  }, []);
+
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles["form__container"]}>
+      <div id="create-workout" className={styles["form__container"]}>
         <h2 className="text-5xl font-extrabold">Add Workout</h2>
         <Input
           size="lg"

@@ -38,8 +38,6 @@ function SetsDetails({
     return () => window.removeEventListener("click", handler);
   }, [handleShowSetDetailsModal]);
 
-  // console.log("setsContainer", setsContainer);
-
   return (
     <div>
       <div className={styles["sets-details"]}>
