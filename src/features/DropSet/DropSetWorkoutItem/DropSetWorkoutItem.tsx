@@ -3,15 +3,18 @@ import { HiMiniEye, HiMiniPencilSquare, HiTrash } from "react-icons/hi2";
 import { WorkoutObject } from "../../../interfaces/interfaces";
 import Menus from "../../../ui/Menus/Menus";
 import Modal from "../../../ui/Modal/Modal";
-import DeleteWorkout from "../../../components/DeleteWorkout/DeleteWorkout";
 import { FaFireFlameSimple } from "react-icons/fa6";
 import WorkoutDetails from "../../WorkoutDetails/WorkoutDetails";
+import DeleteWindow from "../../../components/DeleteWindow/DeleteWindow";
+import { useDeleteWorkoutMutation } from "../../../services/workoutApi";
 
 interface Props {
   workout: WorkoutObject;
 }
 
 function DropSetWorkoutItem({ workout }: Props) {
+  const [deleteWorkout, response] = useDeleteWorkoutMutation();
+
   const totalReps = workout.sets.reduce(
     (acc, set) => acc + Number(set["setsReps"]),
     0
@@ -84,7 +87,11 @@ function DropSetWorkoutItem({ workout }: Props) {
               </Modal.Window>
 
               <Modal.Window name="delete">
-                <DeleteWorkout workout={workout} />
+                <DeleteWindow
+                  response={response}
+                  deleteFC={deleteWorkout}
+                  deletedItem={workout}
+                />
               </Modal.Window>
             </Menus.Menu>
           </Modal>

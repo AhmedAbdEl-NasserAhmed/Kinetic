@@ -36,11 +36,22 @@ function AddCustomProgram({ setShowModal }: Props) {
 
   console.log("FormData", formData);
 
+  const allDaysCompleted = programDays.every((day) => day.isCompleted);
+
   function onSubmit() {
+    const uncompletedElement = document.getElementsByClassName("not-complete");
+
+    Array.from(uncompletedElement).forEach((set) => {
+      set.classList.add("check-sets");
+    });
+
+    if (!allDaysCompleted) return;
+
     addProgram({
       id: crypto.randomUUID(),
       name: formData.programName,
       days: programDays,
+      isCustom: true,
     });
     setShowModal();
   }

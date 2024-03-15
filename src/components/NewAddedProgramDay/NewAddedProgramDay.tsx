@@ -18,6 +18,10 @@ function NewAddedProgramDay({
     );
   }, [programDay, setIsPrevious, programDays, showDayDetails]);
 
+  console.log("programDay", programDay);
+
+  console.log("isPrevious", isPrevious);
+
   return (
     <div
       onClick={() => {

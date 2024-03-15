@@ -1,25 +1,31 @@
-import { WorkoutObject } from "../../interfaces/interfaces";
-import { useDeleteWorkoutMutation } from "../../services/workoutApi";
+import { CustomProgram, WorkoutObject } from "../../interfaces/interfaces";
 import Button from "../../ui/Button/Button";
 import Spinner from "../../ui/Spinner/Spinner";
-import styles from "./DeleteWorkout.module.scss";
+import styles from "./DeleteWindow.module.scss";
 
 interface Props {
   setShowModal?: () => void;
-  workout: WorkoutObject;
+  deleteFC?: (id: string) => void;
+  deletedItem?: CustomProgram | WorkoutObject;
+  response: {
+    isLoading: boolean;
+  };
 }
 
-function DeleteWorkout({ workout, setShowModal }: Props) {
-  const [deleteWorkout, response] = useDeleteWorkoutMutation();
-
+function DeleteWindow({
+  deletedItem,
+  setShowModal,
+  deleteFC,
+  response,
+}: Props) {
   return (
-    <div className={styles["delete-workout"]}>
+    <div className={styles["delete-window"]}>
       <h2 className="text-[2.5rem] font-extrabold leading-[4rem]">
-        Are you sure that you want to Delete this workout ?
+        This item Will be deleted permenantely , Are you sure ?
       </h2>
       <div className="flex justify-center gap-7">
         <Button
-          onClick={() => deleteWorkout(workout.id)}
+          onClick={() => deleteFC(deletedItem.id)}
           variation="danger"
           size="md"
         >
@@ -42,4 +48,4 @@ function DeleteWorkout({ workout, setShowModal }: Props) {
   );
 }
 
-export default DeleteWorkout;
+export default DeleteWindow;

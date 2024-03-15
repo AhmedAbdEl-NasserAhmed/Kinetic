@@ -5,13 +5,16 @@ import WorkoutDetails from "../../features/WorkoutDetails/WorkoutDetails";
 import Menus from "../../ui/Menus/Menus";
 import Modal from "../../ui/Modal/Modal";
 import styles from "./BasicWorkoutItem.module.scss";
-import DeleteWorkout from "../DeleteWorkout/DeleteWorkout";
+import DeleteWindow from "../DeleteWindow/DeleteWindow";
+import { useDeleteWorkoutMutation } from "../../services/workoutApi";
 
 interface Props {
   workout: WorkoutObject;
 }
 
 function BasicWorkoutItem({ workout }: Props) {
+  const [deleteWorkout, response] = useDeleteWorkoutMutation();
+
   const totalReps = workout.sets.reduce(
     (acc, set) => acc + Number(set["setsReps"]),
     0
@@ -66,7 +69,11 @@ function BasicWorkoutItem({ workout }: Props) {
             <WorkoutDetails workout={workout} />
           </Modal.Window>
           <Modal.Window name="delete">
-            <DeleteWorkout workout={workout} />
+            <DeleteWindow
+              deleteFC={deleteWorkout}
+              response={response}
+              deletedItem={workout}
+            />
           </Modal.Window>
         </Menus.Menu>
       </Modal>

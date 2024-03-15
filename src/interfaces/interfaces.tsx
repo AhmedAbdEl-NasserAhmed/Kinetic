@@ -43,3 +43,10 @@ export interface CustomDayProgram {
   name: string;
   isCompleted: boolean;
 }
+
+export interface CustomProgram {
+  id: string;
+  name: string;
+  days: CustomDayProgram[];
+  isCustom: true;
+}
