@@ -3,6 +3,9 @@ import { useFetchProgramsQuery } from "../../services/programsApi";
 import Container from "../../ui/Container/Container";
 import Spinner from "../../ui/Spinner/Spinner";
 import ProgramItem from "./ProgramItem/ProgramItem";
+import Modal from "../../ui/Modal/Modal";
+import CustomProgram from "../../ui/CustomProgram/CustomProgram";
+import AddCustomProgram from "../Forms/AddCustomProgram/AddCustomProgram";
 
 function ProgramsList() {
   const { data, isLoading } = useFetchProgramsQuery("programs");
@@ -13,11 +16,19 @@ function ProgramsList() {
   return (
     <div className={styles.programs}>
       <Container>
-        <div className={styles["programs__container"]}>
+        <ul className={styles["programs__container"]}>
           {data?.map((program) => (
             <ProgramItem key={program.id} program={program} />
           ))}
-        </div>
+          <Modal>
+            <Modal.Open opens="custom-program">
+              <CustomProgram />
+            </Modal.Open>
+            <Modal.Window name="custom-program">
+              <AddCustomProgram />
+            </Modal.Window>
+          </Modal>
+        </ul>
       </Container>
     </div>
   );

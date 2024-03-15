@@ -11,7 +11,7 @@ import { useAppSelector } from "../../../hooks/hooks";
 import { useAddWorkoutProgramMutation } from "../../../services/workoutApi";
 import { useParams } from "react-router-dom";
 import { ISetObject, DefaultValues } from "../../../interfaces/interfaces";
-import NewAddedSet from "./Set/NewAddedSet/NewAddedSet";
+import NewAddedSet from "../../NewAddedSet/NewAddedSet";
 import { FaFireFlameCurved, FaFireFlameSimple } from "react-icons/fa6";
 import PillShape from "../../../ui/PillShape/PillShape";
 import SuperSet from "../../../features/SuperSet/SuperSet";

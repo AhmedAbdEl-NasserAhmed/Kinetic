@@ -8,12 +8,12 @@ interface Props {
 function ProgramItem({ program }: Props) {
   return (
     <Link to={`/programs/${program?.id}`}>
-      <div className={styles["program-item"]}>
+      <li className={styles["program-item"]}>
         <h1 className={styles["program-item__heading"]}>
           {program?.name?.toUpperCase()}
         </h1>
         <p>Program</p>
-      </div>
+      </li>
     </Link>
   );
 }

@@ -1,5 +1,6 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useGetPrograms } from "../hooks/useGetPrograms";
+import { useAddProgram } from "../hooks/useAddProgram";
 
 export const programsApi = createApi({
   reducerPath: "programsApi",
@@ -10,7 +11,11 @@ export const programsApi = createApi({
       providesTags: ["programs"],
       queryFn: useGetPrograms,
     }),
+    addProgram: builder.mutation({
+      queryFn: useAddProgram,
+      invalidatesTags: ["programs"],
+    }),
   }),
 });
 
-export const { useFetchProgramsQuery } = programsApi;
+export const { useFetchProgramsQuery, useAddProgramMutation } = programsApi;

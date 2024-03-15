@@ -37,3 +37,9 @@ export interface WorkoutObject {
   superSets?: ISetObject[];
   dropSets?: ISetObject[];
 }
+
+export interface CustomDayProgram {
+  id: string;
+  name: string;
+  isCompleted: boolean;
+}

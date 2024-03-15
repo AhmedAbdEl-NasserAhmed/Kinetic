@@ -1,8 +1,8 @@
 import { useState } from "react";
-import NewAddedSet from "../../components/Forms/CreateWorkout/Set/NewAddedSet/NewAddedSet";
+import NewAddedSet from "../../components/NewAddedSet/NewAddedSet";
 import Input from "../../ui/Input/Input";
 import styles from "./SuperSet.module.scss";
-import SetSuperSetDetails from "../../components/Forms/SetSuperSetDetails/SetSuperSetDetails";
+import SetSuperSetDetails from "./SetSuperSetDetails/SetSuperSetDetails";
 import Button from "../../ui/Button/Button";
 import { FaAnglesUp } from "react-icons/fa6";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";

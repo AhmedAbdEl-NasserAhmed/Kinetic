@@ -1,0 +1,42 @@
+.programDay {
+  display: flex;
+  flex-direction: column;
+  width: 6rem;
+  height: 8rem;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: -2px 10px 5px -7px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: 0.5s all;
+
+  &:hover {
+    transform: scale(1.1) translateY(-10px);
+  }
+
+  &__details-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    h4 {
+      margin-top: auto;
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background-color: var(--dark-blue-50);
+      color: var(--color-white);
+    }
+  }
+}
+
+// className="basis-8/12 flex items-center justify-center text-4xl font-extrabold text-blue-900"

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import NewAddedSet from "../../components/Forms/CreateWorkout/Set/NewAddedSet/NewAddedSet";
+import NewAddedSet from "../../components/NewAddedSet/NewAddedSet";
 import Input from "../../ui/Input/Input";
 import Button from "../../ui/Button/Button";
 import styles from "./DropSet.module.scss";
 import { FaAnglesUp } from "react-icons/fa6";
 import { ISetObject } from "../../interfaces/interfaces";
-import SetDropSetDetails from "../../components/Forms/SetDropSetDetails/SetDropSetDetails";
+import SetDropSetDetails from "./SetDropSetDetails/SetDropSetDetails";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
 import { scollMainContainer } from "../../helpers/getScroll";
 

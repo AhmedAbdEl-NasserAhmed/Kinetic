@@ -1,0 +1,22 @@
+.custom-program {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--dark-blue-50);
+  height: 20rem;
+  font-size: 8rem;
+  color: var(--dark-blue-50);
+  cursor: pointer;
+  transition: all 0.5s;
+
+  h2 {
+    font-size: 4rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 79, 250, 0.5);
+    border: 2px dashed white;
+    color: white;
+  }
+}

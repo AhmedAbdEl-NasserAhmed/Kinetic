@@ -6,8 +6,14 @@ import Container from "../../ui/Container/Container";
 import WorkoutsList from "./WorkoutsList/WorkoutsList";
 import Menus from "../../ui/Menus/Menus";
 import DateSlider from "../../ui/DateSlider/DateSlider";
+import AddWorkout from "../../features/AddWorkout";
+import { useState } from "react";
 
-function WorkoutsDashboard({ today, currentDateIndex, setCurrentDateIndex }) {
+function WorkoutsDashboard() {
+  const today = new Date(Date.now()).toDateString();
+
+  const [currentDateIndex, setCurrentDateIndex] = useState<string>();
+
   const { user } = useAppSelector((state) => state.authentication);
 
   const { name } = useParams();
@@ -28,6 +34,7 @@ function WorkoutsDashboard({ today, currentDateIndex, setCurrentDateIndex }) {
         data={data}
         today={today}
       />
+      {today === currentDateIndex && <AddWorkout />}
       <Container>
         <Menus>
           <WorkoutsList currentDateIndex={currentDateIndex} workouts={data} />
