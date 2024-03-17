@@ -4,9 +4,9 @@ import { HiMiniEye, HiTrash, HiMiniPencilSquare } from "react-icons/hi2";
 import Menus from "../../ui/Menus/Menus";
 import Modal from "../../ui/Modal/Modal";
 import styles from "./BasicWorkoutItem.module.scss";
-import DeleteWindow from "../DeleteWindow/DeleteWindow";
+import DeleteWindow from "../../components/DeleteWindow/DeleteWindow";
 import { useDeleteWorkoutMutation } from "../../services/workoutApi";
-import WorkoutDetails from "../WorkoutDetails/WorkoutDetails";
+import WorkoutDetails from "../../components/WorkoutDetails/WorkoutDetails";
 
 interface Props {
   workout: WorkoutObject;
@@ -68,6 +68,7 @@ function BasicWorkoutItem({ workout }: Props) {
           <Modal.Window name="details">
             <WorkoutDetails workout={workout} />
           </Modal.Window>
+
           <Modal.Window name="delete">
             <DeleteWindow
               deleteFC={deleteWorkout}

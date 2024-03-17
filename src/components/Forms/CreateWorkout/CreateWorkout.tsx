@@ -79,7 +79,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const { name } = useParams();
 
-  console.log("FORM - DATA", formData);
+  // console.log("FORM - DATA", formData);
 
   function onSubmit() {
     const uncompletedElement = document.getElementsByClassName("not-complete");

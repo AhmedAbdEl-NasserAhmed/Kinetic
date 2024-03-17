@@ -1,0 +1,14 @@
+.dropSet-details {
+  width: min(50vw, 80rem);
+  background-color: var(--color-white);
+  border-radius: 10px;
+  overflow-y: scroll;
+  height: 90vh;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding: min(2vw, 6rem);
+  }
+}

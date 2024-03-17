@@ -4,9 +4,9 @@ import { WorkoutObject } from "../../../interfaces/interfaces";
 import Menus from "../../../ui/Menus/Menus";
 import Modal from "../../../ui/Modal/Modal";
 import { FaFireFlameSimple } from "react-icons/fa6";
-import WorkoutDetails from "../../WorkoutDetails/WorkoutDetails";
 import DeleteWindow from "../../../components/DeleteWindow/DeleteWindow";
 import { useDeleteWorkoutMutation } from "../../../services/workoutApi";
+import WorkoutDetails from "../../../components/WorkoutDetails/WorkoutDetails";
 
 interface Props {
   workout: WorkoutObject;
