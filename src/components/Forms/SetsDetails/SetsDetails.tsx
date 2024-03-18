@@ -5,6 +5,7 @@ import styles from "./SetsDetails.module.scss";
 import { ISetObject } from "../../../interfaces/interfaces";
 
 function SetsDetails({
+  setArraySets,
   register,
   errors,
   handleShowSetDetailsModal,
@@ -17,14 +18,44 @@ function SetsDetails({
 }) {
   const overlayRef = useRef<HTMLElement>(null);
 
-  const chosenSet = sets.find((set: ISetObject) => set.id === selectedSet.id);
+  const chosenSetIndex = sets.findIndex(
+    (set: ISetObject) => set.id === selectedSet.id
+  );
 
   function modifySet() {
-    chosenSet.setsWeight = +formData.setsDetailWeight;
-    chosenSet.setsReps = +formData.setsDetailReps;
-    if (chosenSet.setsWeight && chosenSet.setsReps)
-      chosenSet.isCompleted = true;
-    chosenSet.weightUnit = weightUnit;
+    setArraySets((prevState) => [
+      ...prevState.slice(0, chosenSetIndex),
+      {
+        ...prevState[chosenSetIndex],
+        setsWeight: +formData.setsDetailWeight,
+        setsReps: +formData.setsDetailReps,
+        isCompleted: true,
+        weightUnit,
+      }, // Update object
+      ...prevState.slice(chosenSetIndex + 1),
+    ]);
+
+    // Object.assign(chosenSet, {
+    //   setsWeight: +formData.setsDetailWeight,
+    //   setsReps: +formData.setsDetailReps,
+    //   isCompleted: true,
+    //   weightUnit,
+    // });
+    // setUpdatedSelectedSet({
+    //   ...selectedSet,
+    //   setsWeight: 180,
+    //   setsReps: 150,
+    // });
+    // chosenSet = {
+    //   ...chosenSet,
+    //   setsWeight: +formData.setsDetailWeight,
+    //   setsReps: +formData.setsDetailReps,
+    // };
+    // chosenSet.setsWeight = +formData.setsDetailWeight;
+    // chosenSet.setsReps = +formData.setsDetailReps;
+    // if (chosenSet.setsWeight && chosenSet.setsReps)
+    //   chosenSet.isCompleted = true;
+    // chosenSet.weightUnit = weightUnit;
   }
 
   useEffect(() => {

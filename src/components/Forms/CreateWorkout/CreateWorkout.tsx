@@ -304,6 +304,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
         {showSetDetails && (
           <SetsDetails
+            setArraySets={setSets}
             resetField={resetField}
             handleShowSetDetailsModal={setShowSetDetails}
             errors={errors}
@@ -363,6 +364,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
       {showSuperSetForm && (
         <SuperSet
+          setSuperSets={setSuperSets}
           setToggleSets={setToggleSets}
           toggleSets={toggleSets}
           setShowSuperSetForm={setShowSuperSetForm}

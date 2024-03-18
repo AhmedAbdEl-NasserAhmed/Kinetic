@@ -7,6 +7,7 @@ import styles from "./BasicWorkoutItem.module.scss";
 import DeleteWindow from "../../components/DeleteWindow/DeleteWindow";
 import { useDeleteWorkoutMutation } from "../../services/workoutApi";
 import WorkoutDetails from "../../components/WorkoutDetails/WorkoutDetails";
+import UpdateBasicWorkoutItem from "./UpdateBasicWorkoutItem/UpdateBasicWorkoutItem";
 
 interface Props {
   workout: WorkoutObject;
@@ -67,6 +68,10 @@ function BasicWorkoutItem({ workout }: Props) {
 
           <Modal.Window name="details">
             <WorkoutDetails workout={workout} />
+          </Modal.Window>
+
+          <Modal.Window name="edit">
+            <UpdateBasicWorkoutItem workout={workout} />
           </Modal.Window>
 
           <Modal.Window name="delete">

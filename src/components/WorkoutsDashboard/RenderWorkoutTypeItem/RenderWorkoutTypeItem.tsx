@@ -1,7 +1,7 @@
 import { WorkoutObject } from "../../../interfaces/interfaces";
-import BasicWorkoutItem from "../../BasicWorkoutItem/BasicWorkoutItem";
 import SuperSetWorkoutItem from "../../../features/SuperSet/SuperSetWorkoutItem/SuperSetWorkoutItem";
 import DropSetWorkoutItem from "../../../features/DropSet/DropSetWorkoutItem/DropSetWorkoutItem";
+import BasicWorkoutItem from "../../../features/BasicWorkoutItem/BasicWorkoutItem";
 
 interface Props {
   workout: WorkoutObject;

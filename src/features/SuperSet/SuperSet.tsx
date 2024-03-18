@@ -2,14 +2,15 @@ import { useState } from "react";
 import NewAddedSet from "../../components/NewAddedSet/NewAddedSet";
 import Input from "../../ui/Input/Input";
 import styles from "./SuperSet.module.scss";
-import SetSuperSetDetails from "./SetSuperSetDetails/SetSuperSetDetails";
 import Button from "../../ui/Button/Button";
 import { FaAnglesUp } from "react-icons/fa6";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
 import { scollMainContainer } from "../../helpers/getScroll";
+import SetsDetails from "../../components/Forms/SetsDetails/SetsDetails";
 
 function SuperSet({
   unregister,
+  setSuperSets,
   setSelectedSuperSet,
   register,
   errors,
@@ -83,13 +84,27 @@ function SuperSet({
         <span className="text-3xl text-blue-800">{superSets.length}</span>
       </h2>
 
-      {showSuperSetDetails && (
+      {/* {showSuperSetDetails && (
         <SetSuperSetDetails
           weightUnit={weightUnit}
           setWeightUnit={setWeightUnit}
           resetField={resetField}
           superSets={superSets}
           selectedSuperSet={selectedSuperSet}
+          handleShowSetDetailsModal={setShowSuperSetDetails}
+          register={register}
+          errors={errors}
+          formData={formData}
+        />
+      )} */}
+      {showSuperSetDetails && (
+        <SetsDetails
+          weightUnit={weightUnit}
+          setWeightUnit={setWeightUnit}
+          resetField={resetField}
+          setArraySets={setSuperSets}
+          sets={superSets}
+          selectedSet={selectedSuperSet}
           handleShowSetDetailsModal={setShowSuperSetDetails}
           register={register}
           errors={errors}
