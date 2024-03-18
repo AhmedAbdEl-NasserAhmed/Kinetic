@@ -5,9 +5,9 @@ import Button from "../../ui/Button/Button";
 import styles from "./DropSet.module.scss";
 import { FaAnglesUp } from "react-icons/fa6";
 import { ISetObject } from "../../interfaces/interfaces";
-import SetDropSetDetails from "./SetDropSetDetails/SetDropSetDetails";
 import ChangeExtraSet from "../../ui/ChangeExtraSet/ChangeExtraSet";
 import { scollMainContainer } from "../../helpers/getScroll";
+import SetsDetails from "../../components/Forms/SetsDetails/SetsDetails";
 
 function DropSet({
   unregister,
@@ -135,13 +135,15 @@ function DropSet({
           </Button>
         </div>
       </div>
+
       {showDropSetDetails && (
-        <SetDropSetDetails
+        <SetsDetails
+          setArraySets={setDropSets}
           weightUnit={weightUnit}
           setWeightUnit={setWeightUnit}
           resetField={resetField}
-          dropSets={dropSets}
-          selectedDropSet={selectedDropSet}
+          sets={dropSets}
+          selectedSet={selectedDropSet}
           handleShowSetDetailsModal={setShowDropSetDetails}
           register={register}
           errors={errors}

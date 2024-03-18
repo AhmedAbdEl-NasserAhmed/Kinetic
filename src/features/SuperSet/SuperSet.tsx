@@ -84,19 +84,6 @@ function SuperSet({
         <span className="text-3xl text-blue-800">{superSets.length}</span>
       </h2>
 
-      {/* {showSuperSetDetails && (
-        <SetSuperSetDetails
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
-          resetField={resetField}
-          superSets={superSets}
-          selectedSuperSet={selectedSuperSet}
-          handleShowSetDetailsModal={setShowSuperSetDetails}
-          register={register}
-          errors={errors}
-          formData={formData}
-        />
-      )} */}
       {showSuperSetDetails && (
         <SetsDetails
           weightUnit={weightUnit}

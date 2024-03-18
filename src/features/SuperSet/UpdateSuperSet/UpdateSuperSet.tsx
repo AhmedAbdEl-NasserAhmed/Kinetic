@@ -1,27 +1,34 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useUpdateWorkoutMutation } from "../../../services/workoutApi";
+import Button from "../../../ui/Button/Button";
 import Input from "../../../ui/Input/Input";
+import { useForm } from "react-hook-form";
+import { ISetObject, WorkoutObject } from "../../../interfaces/interfaces";
 import { radioButtons } from "../../../constants/RadioButtons";
 import HiddenRadioButton from "../../../components/HiddenRadioButton/HiddenRadioButton";
 import ErrorMessage from "../../../ui/ErrorMessage/ErrorMessage";
-import Button from "../../../ui/Button/Button";
-import {
-  ISetObject,
-  UpdateBasicWorkoutDefaultValues,
-  WorkoutObject,
-} from "../../../interfaces/interfaces";
 import NewAddedSet from "../../../components/NewAddedSet/NewAddedSet";
-import { useState } from "react";
 import SetsDetails from "../../../components/Forms/SetsDetails/SetsDetails";
-import styles from "./UpdateBasicWorkoutItem.module.scss";
-import { useUpdateWorkoutMutation } from "../../../services/workoutApi";
+import styles from "./UpdateSuperSet.module.scss";
+import SuperSetUpdateDetails from "./SuperSetUpdateDetails/SuperSetUpdateDetails";
 
-interface Props {
+interface UpdateDropSetDefaultValues {
+  workoutName?: string;
+  targetedMuscle?: string;
+  setsNumber?: number;
+  superSetName?: string;
+  superSetsNumber?: number;
+}
+
+interface props {
   workout: WorkoutObject;
   setShowModal?: () => void;
 }
 
-function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
+function UpdateSuperSet({ workout, setShowModal }: props) {
   const [weightUnit, setWeightUnit] = useState<string>("KG");
+
+  console.log("workout", workout);
 
   const {
     setValue,
@@ -31,11 +38,13 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<UpdateBasicWorkoutDefaultValues>({
+  } = useForm<UpdateDropSetDefaultValues>({
     defaultValues: {
       workoutName: workout.workoutName,
       targetedMuscle: workout.tragetedMuscle,
       setsNumber: workout.sets.length,
+      superSetsNumber: workout.superSets.length,
+      superSetName: workout.superSetName,
     },
   });
 
@@ -43,11 +52,21 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
 
   const [updateSets, setUpdateSets] = useState(workout.sets);
 
+  const [updateSuperSets, setUpdateSuperSets] = useState(workout.superSets);
+
   const [updatedSelectedSet, setUpdatedSelectedSet] = useState();
+
+  const [selectedUpdatedSuperSet, setSelectedUpdatedSuperset] = useState();
 
   const [showSetDetails, setShowSetDetails] = useState(false);
 
   const [updateWorkout] = useUpdateWorkoutMutation();
+
+  const areAllSetsCompleted = updateSets.every((set) => set.isCompleted);
+
+  const areAllSuperSetsCompleted = updateSuperSets.every(
+    (set) => set.isCompleted
+  );
 
   function addSet() {
     const setNumbersInput = document.getElementById(
@@ -64,12 +83,24 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
 
     setUpdateSets((data) => [...data, setObject]);
 
+    const superSetObject: ISetObject = {
+      id: crypto.randomUUID(),
+      setsWeight: "",
+      setsReps: "",
+      isCompleted: false,
+      weightUnit: "",
+    };
+
+    setUpdateSuperSets((superSets) => [...superSets, superSetObject]);
+
     setValue("setsNumber", Number(setNumbersInput.value) + 1);
+
     clearErrors("setsNumber");
   }
 
   function removeSet() {
     if (formData.setsNumber <= 1) return;
+
     const setNumbersInput = document.getElementById(
       "setsNumber"
     )! as HTMLInputElement;
@@ -78,23 +109,39 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
 
     setUpdateSets((set) => set.filter((set) => set.id !== lastElement.id));
 
+    const lastSuperElement = updateSuperSets[updateSuperSets.length - 1];
+
+    setUpdateSuperSets((set) =>
+      set.filter((set) => set.id !== lastSuperElement.id)
+    );
+
     setValue("setsNumber", Number(setNumbersInput.value) - 1);
   }
 
   function onSubmit() {
+    const uncompletedElement = document.getElementsByClassName("not-complete");
+
+    Array.from(uncompletedElement).forEach((set) => {
+      set.classList.add("check-sets");
+    });
+
+    if (!areAllSetsCompleted || !areAllSuperSetsCompleted) return;
+
     updateWorkout({
       id: workout.id,
       data: {
         workoutName: formData.workoutName,
         tragetedMuscle: formData.targetedMuscle,
         sets: updateSets,
+        superSets: updateSuperSets,
+        superSetName: formData.superSetName,
       },
     });
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles["update-basicWorkout"]} id="create-workout">
+      <div className={styles["update-superSet"]} id="create-workout">
         <h2 className="text-4xl font-extrabold">Update Workout</h2>
         <Input
           size="lg"
@@ -123,12 +170,7 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
                 id={button.id}
                 value={button.value}
                 register={{
-                  ...register("targetedMuscle", {
-                    required: {
-                      value: true,
-                      message: "This field is required",
-                    },
-                  }),
+                  ...register("targetedMuscle"),
                 }}
               />
             ))}
@@ -148,16 +190,6 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
             type="number"
             register={register}
             errors={errors}
-            validiationInputs={{
-              required: {
-                value: true,
-                message: "This Field is required",
-              },
-              min: {
-                value: 1,
-                message: "Minimun sets number should be more than 1",
-              },
-            }}
           />
 
           <div className="flex items-center gap-10 ">
@@ -210,11 +242,21 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
             setWeightUnit={setWeightUnit}
           />
         )}
+        <SuperSetUpdateDetails
+          resetField={resetField}
+          updatedSuperSets={updateSuperSets}
+          errors={errors}
+          formData={formData}
+          register={register}
+          setSelectedUpdatedSuperSet={setSelectedUpdatedSuperset}
+          selectedUpdatedSuperSet={selectedUpdatedSuperSet}
+          setUpdateSuperSets={setUpdateSuperSets}
+        />
 
         <hr />
         <div className="flex gap-5 ">
           <Button type="submit" variation="primary" size="md">
-            update Workout
+            Update Workout
           </Button>
           <Button
             type="button"
@@ -230,4 +272,4 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
   );
 }
 
-export default UpdateBasicWorkoutItem;
+export default UpdateSuperSet;

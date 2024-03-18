@@ -31,31 +31,9 @@ function SetsDetails({
         setsReps: +formData.setsDetailReps,
         isCompleted: true,
         weightUnit,
-      }, // Update object
+      },
       ...prevState.slice(chosenSetIndex + 1),
     ]);
-
-    // Object.assign(chosenSet, {
-    //   setsWeight: +formData.setsDetailWeight,
-    //   setsReps: +formData.setsDetailReps,
-    //   isCompleted: true,
-    //   weightUnit,
-    // });
-    // setUpdatedSelectedSet({
-    //   ...selectedSet,
-    //   setsWeight: 180,
-    //   setsReps: 150,
-    // });
-    // chosenSet = {
-    //   ...chosenSet,
-    //   setsWeight: +formData.setsDetailWeight,
-    //   setsReps: +formData.setsDetailReps,
-    // };
-    // chosenSet.setsWeight = +formData.setsDetailWeight;
-    // chosenSet.setsReps = +formData.setsDetailReps;
-    // if (chosenSet.setsWeight && chosenSet.setsReps)
-    //   chosenSet.isCompleted = true;
-    // chosenSet.weightUnit = weightUnit;
   }
 
   useEffect(() => {

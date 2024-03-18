@@ -1,26 +1,30 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useUpdateWorkoutMutation } from "../../../services/workoutApi";
+import Button from "../../../ui/Button/Button";
 import Input from "../../../ui/Input/Input";
+import { useForm } from "react-hook-form";
+import { ISetObject, WorkoutObject } from "../../../interfaces/interfaces";
 import { radioButtons } from "../../../constants/RadioButtons";
 import HiddenRadioButton from "../../../components/HiddenRadioButton/HiddenRadioButton";
 import ErrorMessage from "../../../ui/ErrorMessage/ErrorMessage";
-import Button from "../../../ui/Button/Button";
-import {
-  ISetObject,
-  UpdateBasicWorkoutDefaultValues,
-  WorkoutObject,
-} from "../../../interfaces/interfaces";
 import NewAddedSet from "../../../components/NewAddedSet/NewAddedSet";
-import { useState } from "react";
 import SetsDetails from "../../../components/Forms/SetsDetails/SetsDetails";
-import styles from "./UpdateBasicWorkoutItem.module.scss";
-import { useUpdateWorkoutMutation } from "../../../services/workoutApi";
+import styles from "./UpdateDropSet.module.scss";
+import DropSetUpdateDetails from "./DropSetUpdateDetails/DropSetUpdateDetails";
 
-interface Props {
+interface UpdateDropSetDefaultValues {
+  workoutName?: string;
+  targetedMuscle?: string;
+  setsNumber?: number;
+  dropSetsNumber?: number;
+}
+
+interface props {
   workout: WorkoutObject;
   setShowModal?: () => void;
 }
 
-function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
+function UpdateDropSet({ workout, setShowModal }: props) {
   const [weightUnit, setWeightUnit] = useState<string>("KG");
 
   const {
@@ -31,11 +35,12 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<UpdateBasicWorkoutDefaultValues>({
+  } = useForm<UpdateDropSetDefaultValues>({
     defaultValues: {
       workoutName: workout.workoutName,
       targetedMuscle: workout.tragetedMuscle,
       setsNumber: workout.sets.length,
+      dropSetsNumber: workout.dropSets.length,
     },
   });
 
@@ -43,11 +48,21 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
 
   const [updateSets, setUpdateSets] = useState(workout.sets);
 
+  const [updateDropSets, setUpdateDropSets] = useState(workout.dropSets);
+
   const [updatedSelectedSet, setUpdatedSelectedSet] = useState();
+
+  const [selectedUpdatedDropSet, setSelectedUpdatedDropSet] = useState();
 
   const [showSetDetails, setShowSetDetails] = useState(false);
 
   const [updateWorkout] = useUpdateWorkoutMutation();
+
+  const areAllSetsCompleted = updateSets.every((set) => set.isCompleted);
+
+  const areAllDropSetsCompleted = updateDropSets.every(
+    (set) => set.isCompleted
+  );
 
   function addSet() {
     const setNumbersInput = document.getElementById(
@@ -65,6 +80,7 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
     setUpdateSets((data) => [...data, setObject]);
 
     setValue("setsNumber", Number(setNumbersInput.value) + 1);
+
     clearErrors("setsNumber");
   }
 
@@ -82,19 +98,28 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
   }
 
   function onSubmit() {
+    const uncompletedElement = document.getElementsByClassName("not-complete");
+
+    Array.from(uncompletedElement).forEach((set) => {
+      set.classList.add("check-sets");
+    });
+
+    if (!areAllSetsCompleted || !areAllDropSetsCompleted) return;
+
     updateWorkout({
       id: workout.id,
       data: {
         workoutName: formData.workoutName,
         tragetedMuscle: formData.targetedMuscle,
         sets: updateSets,
+        dropSets: updateDropSets,
       },
     });
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles["update-basicWorkout"]} id="create-workout">
+      <div className={styles["update-dropSet"]} id="create-workout">
         <h2 className="text-4xl font-extrabold">Update Workout</h2>
         <Input
           size="lg"
@@ -123,12 +148,7 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
                 id={button.id}
                 value={button.value}
                 register={{
-                  ...register("targetedMuscle", {
-                    required: {
-                      value: true,
-                      message: "This field is required",
-                    },
-                  }),
+                  ...register("targetedMuscle"),
                 }}
               />
             ))}
@@ -148,16 +168,6 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
             type="number"
             register={register}
             errors={errors}
-            validiationInputs={{
-              required: {
-                value: true,
-                message: "This Field is required",
-              },
-              min: {
-                value: 1,
-                message: "Minimun sets number should be more than 1",
-              },
-            }}
           />
 
           <div className="flex items-center gap-10 ">
@@ -210,11 +220,23 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
             setWeightUnit={setWeightUnit}
           />
         )}
+        <DropSetUpdateDetails
+          resetField={resetField}
+          updatedDropSets={updateDropSets}
+          errors={errors}
+          formData={formData}
+          register={register}
+          clearErrors={clearErrors}
+          setValue={setValue}
+          setSelectedUpdatedDropSet={setSelectedUpdatedDropSet}
+          selectedUpdatedDropSet={selectedUpdatedDropSet}
+          setUpdateDropSets={setUpdateDropSets}
+        />
 
         <hr />
         <div className="flex gap-5 ">
           <Button type="submit" variation="primary" size="md">
-            update Workout
+            Update Workout
           </Button>
           <Button
             type="button"
@@ -230,4 +252,4 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
   );
 }
 
-export default UpdateBasicWorkoutItem;
+export default UpdateDropSet;

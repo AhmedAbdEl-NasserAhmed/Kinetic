@@ -7,6 +7,7 @@ import { FaFireFlameSimple } from "react-icons/fa6";
 import DeleteWindow from "../../../components/DeleteWindow/DeleteWindow";
 import { useDeleteWorkoutMutation } from "../../../services/workoutApi";
 import WorkoutDetails from "../../../components/WorkoutDetails/WorkoutDetails";
+import UpdateDropSet from "../UpdateDropSet/UpdateDropSet";
 
 interface Props {
   workout: WorkoutObject;
@@ -84,6 +85,9 @@ function DropSetWorkoutItem({ workout }: Props) {
 
               <Modal.Window name="details">
                 <WorkoutDetails workout={workout} />
+              </Modal.Window>
+              <Modal.Window name="edit">
+                <UpdateDropSet workout={workout} />
               </Modal.Window>
 
               <Modal.Window name="delete">

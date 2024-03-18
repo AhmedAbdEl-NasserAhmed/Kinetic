@@ -79,7 +79,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const { name } = useParams();
 
-  // console.log("FORM - DATA", formData);
+  console.log("FORM - DATA", formData);
 
   function onSubmit() {
     const uncompletedElement = document.getElementsByClassName("not-complete");
@@ -106,7 +106,7 @@ function CreateWorkout({ setShowModal }: Props) {
       });
     }
 
-    if (formData.dropSet) {
+    if (formData.dropSetsNumber) {
       addWorkoutProgram({
         id: crypto.randomUUID(),
         userId: user?.uid || user?.uuid,
@@ -120,7 +120,7 @@ function CreateWorkout({ setShowModal }: Props) {
       });
     }
 
-    if (!formData.superSet && !formData.dropSet) {
+    if (!formData.superSet && !formData.dropSetsNumber) {
       addWorkoutProgram({
         id: crypto.randomUUID(),
         userId: user?.uid || user?.uuid,
@@ -161,6 +161,7 @@ function CreateWorkout({ setShowModal }: Props) {
     setSuperSets((superSets) => [...superSets, superSetObject]);
 
     setValue("setsNumber", Number(setNumbersInput.value) + 1);
+
     clearErrors("setsNumber");
   }
 

@@ -14,14 +14,9 @@ export interface DefaultValues {
   setsDetailWeight?: string;
   superSetName?: string;
   superSet?: {
-    setsSuperSetReps: string;
-    setsSuperSetWeight: string;
     superSetName: string;
   };
-  dropSet?: {
-    setsDropSetReps: string;
-    setsDropSetWeight: string;
-  };
+  dropSetsNumber?: number;
 }
 
 export interface WorkoutObject {
@@ -49,4 +44,10 @@ export interface CustomProgram {
   name: string;
   days: CustomDayProgram[];
   isCustom: true;
+}
+
+export interface UpdateBasicWorkoutDefaultValues {
+  workoutName?: string;
+  targetedMuscle?: string;
+  setsNumber?: number;
 }
