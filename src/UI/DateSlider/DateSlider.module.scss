@@ -1,12 +1,18 @@
+@import "../../styles/mixins";
+
 .slider-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-top: 1px solid var(--color-grey-20);
   border-bottom: 1px solid var(--color-grey-20);
   background-color: var(--color-grey-10);
   height: 5rem;
+
+  @include respond(phone) {
+    font-size: 2rem;
+  }
 
   span {
     display: flex;
@@ -14,7 +20,10 @@
     align-items: center;
     align-self: stretch;
     cursor: pointer;
-    flex-basis: 3%;
+    flex-basis: 12%;
     background-color: var(--color-white);
+    @include respond(phone) {
+      flex-basis: 3%;
+    }
   }
 }

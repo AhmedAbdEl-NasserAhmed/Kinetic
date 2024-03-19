@@ -15,8 +15,6 @@ function SuperSetUpdateDetails({
 }) {
   const [showDropSetDetails, setShowDropSetDetails] = useState<boolean>(false);
 
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   return (
     <div>
       <h2 className="text-4xl font-extrabold mb-8 mt-8">Super Set</h2>
@@ -45,8 +43,6 @@ function SuperSetUpdateDetails({
       {showDropSetDetails && (
         <SetsDetails
           setArraySets={setUpdateSuperSets}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
           resetField={resetField}
           sets={updatedSuperSets}
           selectedSet={selectedUpdatedSuperSet}

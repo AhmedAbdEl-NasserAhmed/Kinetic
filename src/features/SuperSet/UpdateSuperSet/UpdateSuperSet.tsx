@@ -26,8 +26,6 @@ interface props {
 }
 
 function UpdateSuperSet({ workout, setShowModal }: props) {
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   console.log("workout", workout);
 
   const {
@@ -238,8 +236,6 @@ function UpdateSuperSet({ workout, setShowModal }: props) {
             sets={updateSets}
             selectedSet={updatedSelectedSet}
             formData={formData}
-            weightUnit={weightUnit}
-            setWeightUnit={setWeightUnit}
           />
         )}
         <SuperSetUpdateDetails

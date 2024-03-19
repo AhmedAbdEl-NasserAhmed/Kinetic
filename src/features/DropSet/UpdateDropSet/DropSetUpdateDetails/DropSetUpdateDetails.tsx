@@ -19,8 +19,6 @@ function DropSetUpdateDetails({
 }) {
   const [showDropSetDetails, setShowDropSetDetails] = useState<boolean>(false);
 
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   function addSet() {
     const setNumbersInput = document.getElementById(
       "dropSetsNumber"
@@ -92,8 +90,6 @@ function DropSetUpdateDetails({
       {showDropSetDetails && (
         <SetsDetails
           setArraySets={setUpdateDropSets}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
           resetField={resetField}
           sets={updatedDropSets}
           selectedSet={selectedUpdatedDropSet}

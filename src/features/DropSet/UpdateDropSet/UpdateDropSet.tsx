@@ -25,8 +25,6 @@ interface props {
 }
 
 function UpdateDropSet({ workout, setShowModal }: props) {
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   const {
     setValue,
     resetField,
@@ -216,8 +214,6 @@ function UpdateDropSet({ workout, setShowModal }: props) {
             sets={updateSets}
             selectedSet={updatedSelectedSet}
             formData={formData}
-            weightUnit={weightUnit}
-            setWeightUnit={setWeightUnit}
           />
         )}
         <DropSetUpdateDetails

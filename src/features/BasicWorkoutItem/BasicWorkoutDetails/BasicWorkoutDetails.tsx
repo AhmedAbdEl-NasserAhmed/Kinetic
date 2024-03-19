@@ -34,7 +34,7 @@ function BasicWorkoutDetails({ workout }: Props) {
           <hr />
         </div>
         <div>
-          <h2 className="text-3xl font-bold mb-8 uppercase ">
+          <h2 className=" text-2xl sm:text-3xl font-bold mb-8 uppercase ">
             Targeted Muscle :
           </h2>
           <HiddenRadioButton
@@ -43,7 +43,7 @@ function BasicWorkoutDetails({ workout }: Props) {
           />
         </div>
         <div className="flex flex-col gap-5">
-          <h2 className="text-3xl font-bold mb-8 uppercase">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8 uppercase">
             Num of Sets :{" "}
             <span className="text-blue-800">{workout.sets.length}</span>
           </h2>
@@ -53,7 +53,7 @@ function BasicWorkoutDetails({ workout }: Props) {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-[8rem]">
+        <div className="flex flex-col gap-5 sm:flex-row items-center sm:gap-[8rem]">
           <div className="flex items-center text-center bg-slate-100  rounded-lg  text-2xl font-semibold">
             <span className="text-blue-800 p-2 ">Weights</span>
             <span className="bg-blue-800 p-2 rounded-lg w-[8rem]  self-stretch text-white">

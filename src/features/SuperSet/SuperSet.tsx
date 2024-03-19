@@ -18,8 +18,8 @@ function SuperSet({
   selectedSuperSet,
   formData,
   resetField,
-  weightUnit,
-  setWeightUnit,
+  // weightUnit,
+  // setWeightUnit,
   setShowModal,
   setShowSuperSetForm,
   toggleSets,
@@ -40,7 +40,7 @@ function SuperSet({
   return (
     <div id="super-set" className={styles["superSet"]}>
       <div className="flex items-center justify-between">
-        <h2 className="text-[4.5rem] font-extrabold text-blue-800 ">
+        <h2 className="text-3xl sm:text-[4.5rem] font-extrabold text-blue-800 ">
           Super Set
         </h2>
         <div className={styles["toggle-sets"]}>
@@ -86,8 +86,8 @@ function SuperSet({
 
       {showSuperSetDetails && (
         <SetsDetails
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
+          // weightUnit={weightUnit}
+          // setWeightUnit={setWeightUnit}
           resetField={resetField}
           setArraySets={setSuperSets}
           sets={superSets}

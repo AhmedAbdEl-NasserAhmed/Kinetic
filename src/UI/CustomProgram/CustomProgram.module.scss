@@ -1,17 +1,27 @@
+@import "../../styles/mixins";
+
 .custom-program {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px dashed var(--dark-blue-50);
-  height: 20rem;
-  font-size: 8rem;
+  height: 16rem;
+  font-size: 5rem;
   color: var(--dark-blue-50);
   cursor: pointer;
   transition: all 0.5s;
 
+  @include respond(phone) {
+    height: 20rem;
+    font-size: 8rem;
+  }
+
   h2 {
-    font-size: 4rem;
+    font-size: 2.5rem;
+    @include respond(phone) {
+      font-size: 4rem;
+    }
   }
 
   &:hover {

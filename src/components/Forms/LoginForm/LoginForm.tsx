@@ -66,7 +66,7 @@ function LoginForm({ ...props }: Props) {
         />
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Button size="lg" variation="primary">
+        <Button size="sm" variation="primary">
           Login
         </Button>
         <span

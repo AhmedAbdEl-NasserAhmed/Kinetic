@@ -1,13 +1,20 @@
+@import "../../styles/mixins";
+
 .programDay {
   display: flex;
   flex-direction: column;
-  width: 6.5rem;
-  height: 8rem;
+  width: 5rem;
+  height: 6.5rem;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: -2px 10px 5px -7px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   transition: 0.5s all;
+
+  @include respond(phone) {
+    width: 6.5rem;
+    height: 8rem;
+  }
 
   &:hover {
     transform: scale(1.1) translateY(-10px);
@@ -22,9 +29,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.4rem;
       font-weight: bold;
       flex: 1;
+      @include respond(phone) {
+        font-size: 2rem;
+      }
     }
 
     h4 {
@@ -34,9 +44,12 @@
       gap: 0.2rem;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1rem;
       background-color: var(--dark-blue-50);
       color: var(--color-white);
+      @include respond(phone) {
+        font-size: 1.5rem;
+      }
     }
   }
 }

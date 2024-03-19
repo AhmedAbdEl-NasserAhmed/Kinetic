@@ -1,17 +1,32 @@
+@import "../../styles/mixins";
+
 .profile-menu {
   position: absolute;
   top: 5.5rem;
-  left: 30rem;
-  padding: 1.5rem;
+  left: 20rem;
+  padding: 1.2rem;
   border-radius: 5px;
   gap: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
   color: var(--dark-blue);
   background-color: var(--color-white);
   box-shadow: 1px -1px 5px 0px rgba(0, 0, 0, 0.3);
   z-index: 50;
+
+  @include respond(phone) {
+    top: 5.5rem;
+    left: 15rem;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  @include respond(tab-land) {
+    left: 20rem;
+  }
+  @include respond(tab-port) {
+    left: 30rem;
+  }
 }

@@ -4,9 +4,9 @@ import LoginPage from "./pages/LoginPage/AuthenticationPage";
 import ProgramsPage from "./pages/ProgramsPage/ProgramsPage";
 import EmailVerficationPage from "./pages/EmailVerficationPage/EmailVerficationPage";
 import ProgramDays from "./pages/ProgramDays/ProgramDays";
-import PageLayout from "./ui/PageLayout/PageLayout";
 import WorkoutsPage from "./pages/WorkoutsPage/WorkoutsPage";
 import AuthRoute from "./ui/AuthRoute/AuthRoute";
+import PageLayout from "./ui/PageLayout/PageLayout";
 
 function App() {
   return (

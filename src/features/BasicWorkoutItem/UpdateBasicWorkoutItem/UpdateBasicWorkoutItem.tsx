@@ -21,8 +21,6 @@ interface Props {
 }
 
 function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   const {
     setValue,
     resetField,
@@ -206,8 +204,6 @@ function UpdateBasicWorkoutItem({ workout, setShowModal }: Props) {
             sets={updateSets}
             selectedSet={updatedSelectedSet}
             formData={formData}
-            weightUnit={weightUnit}
-            setWeightUnit={setWeightUnit}
           />
         )}
 

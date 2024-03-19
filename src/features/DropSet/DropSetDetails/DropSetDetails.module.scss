@@ -1,14 +1,23 @@
+@import "../../../styles/mixins";
+
 .dropSet-details {
-  width: min(50vw, 80rem);
+  width: 90vw;
   background-color: var(--color-white);
   border-radius: 10px;
   overflow-y: scroll;
   height: 90vh;
 
+  @include respond(phone) {
+    width: min(50vw, 80rem);
+  }
+
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 4rem;
     padding: min(2vw, 6rem);
+    @include respond(phone) {
+      gap: 5rem;
+    }
   }
 }

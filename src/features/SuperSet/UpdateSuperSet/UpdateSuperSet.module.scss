@@ -1,3 +1,5 @@
+@import "../../../styles/mixins";
+
 .update-superSet {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,11 @@
   background-color: var(--color-white);
   padding: 2rem 4rem;
   border-radius: 8px;
-  height: 70vh;
+  width: 80vw;
+  height: 80vh;
   overflow-y: scroll;
+
+  @include respond(phone) {
+    width: min(50vw, 60rem);
+  }
 }

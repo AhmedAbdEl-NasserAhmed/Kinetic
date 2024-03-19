@@ -53,6 +53,7 @@ function EmailVerficationPage() {
           Confirm Your Email
         </h2>
         <Input
+          size="large"
           name="verifyEmail"
           id="verifyEmail"
           register={register}

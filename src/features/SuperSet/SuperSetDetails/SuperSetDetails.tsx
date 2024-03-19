@@ -37,15 +37,17 @@ function SuperSetDetails({ workout }: Props) {
   return (
     <div className={styles["superSet-details"]}>
       <div className={styles["superSet-details__container"]}>
-        <h6 className="text-3xl font-bold text-slate-500 bg-slate-200 p-5 text-center  rounded-lg">
+        <h6 className=" text-2xl sm:text-3xl font-bold text-slate-500 bg-slate-200 p-5 text-center  rounded-lg">
           Super Set Workout Details
         </h6>
         <div>
-          <h2 className="text-3xl font-bold mb-3">{workout.workoutName}</h2>
+          <h2 className=" text-2xl sm:text-3xl font-bold mb-3">
+            {workout.workoutName}
+          </h2>
           <hr />
         </div>
         <div>
-          <h2 className="text-3xl font-bold mb-8 uppercase ">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8 uppercase ">
             Targeted Muscle :
           </h2>
           <HiddenRadioButton
@@ -64,7 +66,7 @@ function SuperSetDetails({ workout }: Props) {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-[8rem]">
+        <div className="flex  items-center gap-[6rem] sm:gap-[8rem]">
           <div className="flex items-center text-center bg-slate-100  rounded-lg  text-2xl font-semibold">
             <span className="text-blue-800 p-2 ">Weights</span>
             <span className="bg-blue-800 p-2 rounded-lg w-[8rem]  self-stretch text-white">
@@ -80,10 +82,12 @@ function SuperSetDetails({ workout }: Props) {
         </div>
       </div>
 
-      <div className="bg-slate-200 p-[2rem] flex flex-col gap-[8rem]">
+      <div className="bg-slate-200 p-[2rem] flex flex-col  gap-[4rem] sm:gap-[8rem]">
         <div className="flex items-center justify-between">
-          <h2 className="text-5xl font-extrabold text-blue-800">Super Set</h2>
-          <span className="text-3xl bg-blue-800 p-4 rounded-lg text-white">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-800">
+            Super Set
+          </h2>
+          <span className=" text-2xl sm:text-3xl bg-blue-800 p-4 rounded-lg text-white">
             <FaFireFlameCurved />
           </span>
         </div>
@@ -104,7 +108,7 @@ function SuperSetDetails({ workout }: Props) {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-[8rem]">
+        <div className="flex items-center gap-[6rem] sm:gap-[8rem]">
           <div className="flex items-center text-center bg-slate-100  rounded-lg  text-2xl font-semibold">
             <span className="text-blue-800 p-2 ">Weights</span>
             <span className="bg-blue-800 p-2 rounded-lg w-[8rem]  self-stretch text-white">

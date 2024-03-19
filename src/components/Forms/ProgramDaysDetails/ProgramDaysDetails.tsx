@@ -19,8 +19,6 @@ function ProgramDaysDetails({
     (day: CustomDayProgram) => day.id === selectedDay.id
   );
 
-  console.log(choosenDay);
-
   function modifyDay() {
     choosenDay.name = formData.programDaysName;
     if (choosenDay.name) choosenDay.isCompleted = true;
@@ -41,10 +39,10 @@ function ProgramDaysDetails({
     <div>
       <div className={styles["days-details"]}>
         <div className="flex justify-between items-center">
-          <h2 className="text-4xl font-extrabold">Program Days</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold">Program Days</h2>
         </div>
         <Input
-          size="lg"
+          size="large"
           placeholder="Days Name :"
           id="programDaysName"
           name="programDaysName"
@@ -67,7 +65,7 @@ function ProgramDaysDetails({
               resetField("programDaysName");
             }}
             variation="primary"
-            size="lg"
+            size="md"
           >
             Ok
           </Button>
@@ -77,7 +75,7 @@ function ProgramDaysDetails({
               resetField("programDaysName");
             }}
             variation="danger"
-            size="lg"
+            size="md"
           >
             Cancel
           </Button>

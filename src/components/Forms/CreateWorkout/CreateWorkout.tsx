@@ -59,8 +59,6 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const [selectedDropSet, setSelectedDropSet] = useState<ISetObject>();
 
-  const [weightUnit, setWeightUnit] = useState<string>("KG");
-
   const [showSetDetails, setShowSetDetails] = useState(false);
 
   const [showSuperSetForm, setShowSuperSetForm] = useState<boolean>(false);
@@ -203,7 +201,7 @@ function CreateWorkout({ setShowModal }: Props) {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div id="create-workout" className={styles["form__container"]}>
-        <h2 className="text-5xl font-extrabold">Add Workout</h2>
+        <h2 className="text-4xl sm:text-5xl font-extrabold">Add Workout</h2>
         <Input
           size="lg"
           id="workoutName"
@@ -220,8 +218,10 @@ function CreateWorkout({ setShowModal }: Props) {
           }}
         />
         <div className="flex flex-col gap-7">
-          <h2 className="text-4xl font-extrabold mb-5">TARGETED MUSCLE:</h2>
-          <div className="flex gap-[3rem] items-center flex-wrap ">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-5">
+            TARGETED MUSCLE:
+          </h2>
+          <div className="flex gap-[3rem]  sm:justify-start items-center flex-wrap ">
             {radioButtons.map((button) => (
               <HiddenRadioButton
                 className={button.id === formData.targetedMuscle}
@@ -245,7 +245,9 @@ function CreateWorkout({ setShowModal }: Props) {
             <ErrorMessage message="This Field is required" />
           )}
         </div>
-        <h2 className="text-4xl font-extrabold">Number of Sets :</h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold">
+          Number of Sets :
+        </h2>
 
         <div className="flex items-center gap-[5rem] ">
           <Input
@@ -313,16 +315,14 @@ function CreateWorkout({ setShowModal }: Props) {
             sets={sets}
             selectedSet={selectedSet}
             formData={formData}
-            weightUnit={weightUnit}
-            setWeightUnit={setWeightUnit}
           />
         )}
 
         <hr />
 
         {!showSuperSetForm && !showDropSetForm && (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-[3rem]">
+          <div className="flex sm:items-center  flex-col sm:flex-row gap-12 justify-center  sm:justify-between">
+            <div className="flex items-center justify-center gap-[3rem]">
               <PillShape
                 onClick={() => {
                   getScroll("super-set");
@@ -346,7 +346,7 @@ function CreateWorkout({ setShowModal }: Props) {
                 RightSideContent="Drop Set"
               />
             </div>
-            <div className="flex gap-5 basis-[30rem]">
+            <div className="flex gap-5 sm:basis-[30rem]">
               <Button type="submit" variation="primary" size="md">
                 Add Workout
               </Button>
@@ -370,8 +370,6 @@ function CreateWorkout({ setShowModal }: Props) {
           toggleSets={toggleSets}
           setShowSuperSetForm={setShowSuperSetForm}
           resetField={resetField}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
           selectedSuperSet={selectedSuperSet}
           superSets={superSets}
           setSelectedSuperSet={setSelectedSuperSet}
@@ -393,8 +391,6 @@ function CreateWorkout({ setShowModal }: Props) {
           clearErrors={clearErrors}
           setShowDropSetForm={setShowDropSetForm}
           resetField={resetField}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
           selectedDropSet={selectedDropSet}
           dropSets={dropSets}
           setSelectedDropSet={setSelectedDropSet}

@@ -1,18 +1,32 @@
+@import "../../../styles/mixins";
+
 .program-day {
-  padding: 4rem;
+  padding: 2rem;
   background-color: var(--color-grey-10);
-  border-radius: 20px;
-  border-bottom: 6px solid var(--dark-blue-50);
+  border-radius: 10px;
+  border-bottom: 3px solid var(--dark-blue-50);
   cursor: pointer;
 
+  @include respond(phone) {
+    padding: 4rem;
+    border-radius: 20px;
+    border-bottom: 6px solid var(--dark-blue-50);
+  }
+
   p {
-    font-size: 3rem;
+    font-size: 2rem;
+    @include respond(phone) {
+      font-size: 3rem;
+    }
   }
 
   h2 {
     text-transform: uppercase;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 800;
     color: var(--dark-blue-50);
+    @include respond(phone) {
+      font-size: 4rem;
+    }
   }
 }

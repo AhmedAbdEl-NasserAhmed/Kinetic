@@ -4,6 +4,7 @@ import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import { HiPlay } from "react-icons/hi2";
 import Container from "../../ui/Container/Container";
 import { useNavigate } from "react-router-dom";
+import styles from "./Nav.module.scss";
 
 function Nav() {
   const { user } = useAppSelector((state) => state.authentication);
@@ -15,8 +16,8 @@ function Nav() {
   return (
     <nav className=" relative bg-blue-800 p-[2rem] ">
       <Container>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-[4rem]">
+        <div className={styles["nav-container"]}>
+          <div className="flex items-center gap-[1.5rem] sm:gap-[2rem]  md:gap-[4rem]">
             <span
               className="flex items-center gap-[0.5rem] text-white text-2xl cursor-pointer"
               onClick={() => navigate("/programs")}

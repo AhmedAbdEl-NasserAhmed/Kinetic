@@ -18,8 +18,8 @@ function DropSet({
   selectedDropSet,
   formData,
   resetField,
-  weightUnit,
-  setWeightUnit,
+  // weightUnit,
+  // setWeightUnit,
   setShowModal,
   setShowDropSetForm,
   setDropSets,
@@ -68,7 +68,7 @@ function DropSet({
   return (
     <div id="drop-set" className={styles["dropSet"]}>
       <div className="flex items-center justify-between">
-        <h2 className="text-[4.5rem] font-extrabold text-blue-800 ">
+        <h2 className="text-3xl sm:text-[4.5rem] font-extrabold text-blue-800 ">
           Drop Set
         </h2>
         <div className={styles["toggle-sets"]}>
@@ -96,8 +96,8 @@ function DropSet({
         </div>
       </div>
 
-      <h2 className="text-3xl font-semibold">
-        Num of Drop sets :{" "}
+      <h2 className="text-2xl sm:text-3xl font-semibold">
+        Num of Drop Sets :{" "}
         <span className="text-3xl text-blue-800">{dropSets.length}</span>
       </h2>
 
@@ -139,8 +139,8 @@ function DropSet({
       {showDropSetDetails && (
         <SetsDetails
           setArraySets={setDropSets}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
+          // weightUnit={weightUnit}
+          // setWeightUnit={setWeightUnit}
           resetField={resetField}
           sets={dropSets}
           selectedSet={selectedDropSet}

@@ -30,7 +30,7 @@ function BasicWorkoutItem({ workout }: Props) {
     <li className={styles["workout-item"]}>
       <div className="flex flex-col gap-8">
         <h2 className={styles["workout-item__name"]}>{workout.workoutName}</h2>
-        <div className="flex items-center gap-[2rem]">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-[2rem]">
           <h4 className={styles["workout-item__details"]}>
             Sets:{" "}
             <span className="text-blue-800 font-bold">

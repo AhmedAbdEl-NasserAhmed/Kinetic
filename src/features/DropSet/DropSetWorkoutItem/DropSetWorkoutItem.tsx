@@ -41,13 +41,13 @@ function DropSetWorkoutItem({ workout }: Props) {
         <h2>Drop Set</h2>
         <FaFireFlameSimple />
       </span>
-      <div className="flex flex-col  gap-3">
+      <div className="flex flex-col gap-3">
         <div className={styles["dropSet-container__normal-set"]}>
           <div>
-            <h2 className="text-[4rem] font-extrabold mb-[2rem]">
+            <h2 className="text-[2.5rem] sm:text-[4rem] font-extrabold mb-[2rem]">
               {workout.workoutName}
             </h2>
-            <div className="flex gap-10">
+            <div className="flex flex-col sm:flex-row gap-10">
               <span>
                 Sets :{" "}
                 <span className="text-blue-800"> {workout.sets.length}</span>
@@ -102,7 +102,7 @@ function DropSetWorkoutItem({ workout }: Props) {
         </div>
         <div className={styles["dropSet-container__extra-set"]}>
           <div>
-            <div className="flex gap-10">
+            <div className="flex flex-col sm:flex-row gap-10">
               <span>
                 Sets :{" "}
                 <span className="text-blue-800">

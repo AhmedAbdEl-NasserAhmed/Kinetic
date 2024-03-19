@@ -1,10 +1,17 @@
+@import "../../styles/mixins";
+
 .delete-window {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
-  width: min(50vw, 40rem);
-  padding: min(2vw, 6rem);
+  gap: 2rem;
+  width: min(70vw, 40rem);
+  padding: min(3vw, 6rem);
   background-color: var(--color-white);
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
+
+  @include respond(phone) {
+    gap: 5rem;
+    border-radius: 10px;
+  }
 }

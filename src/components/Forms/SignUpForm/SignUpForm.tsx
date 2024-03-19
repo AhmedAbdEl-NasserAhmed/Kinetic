@@ -39,7 +39,7 @@ function SignUpForm({ ...props }: Props) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-[2rem]"
+      className="flex flex-col justify-center gap-[2.2rem]"
     >
       <h2 className="font-bold text-6xl">Signup</h2>
 
@@ -142,7 +142,7 @@ function SignUpForm({ ...props }: Props) {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <Button size="lg" value="submit" variation="main">
+        <Button size="sm" value="submit" variation="primary">
           Singup
         </Button>
         <span

@@ -1,15 +1,26 @@
+@import "../../styles/mixins";
+
 .dropSet {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
-  padding: 3rem 5rem;
+  gap: 3rem;
+  padding: 2rem;
   background-color: var(--color-grey-10);
-  height: 120vh;
+  // height: 120vh;
+
+  @include respond(phone) {
+    gap: 6rem;
+    padding: 1.5rem 3rem;
+  }
 
   &__icon {
-    font-size: 4rem;
+    font-size: 2rem;
     cursor: pointer;
     color: var(--dark-blue-50);
+
+    @include respond(phone) {
+      font-size: 4rem;
+    }
   }
 }
 

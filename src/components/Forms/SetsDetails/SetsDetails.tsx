@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../../ui/Button/Button";
 import Input from "../../../ui/Input/Input";
 import styles from "./SetsDetails.module.scss";
@@ -13,9 +13,9 @@ function SetsDetails({
   sets,
   selectedSet,
   formData,
-  setWeightUnit,
-  weightUnit,
 }) {
+  const [weightUnit, setWeightUnit] = useState<string>("KG");
+
   const overlayRef = useRef<HTMLElement>(null);
 
   const chosenSetIndex = sets.findIndex(
@@ -51,21 +51,25 @@ function SetsDetails({
     <div>
       <div className={styles["sets-details"]}>
         <div className="flex justify-between items-center">
-          <h2 className="text-4xl font-extrabold">Reps and Weights</h2>
-          <div className={styles["sets-details__weight-unit"]}>
-            <span
-              className={weightUnit === "KG" ? "bg-blue-800 text-white" : ""}
-              onClick={() => setWeightUnit("KG")}
-            >
-              Kg
-            </span>
-            <span
-              className={weightUnit === "LBS" ? "bg-blue-800 text-white" : ""}
-              onClick={() => setWeightUnit("LBS")}
-            >
-              LBS
-            </span>
-          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold">
+            Reps and Weights
+          </h2>
+          {weightUnit && (
+            <div className={styles["sets-details__weight-unit"]}>
+              <span
+                className={weightUnit === "KG" ? "bg-blue-800 text-white" : ""}
+                onClick={() => setWeightUnit("KG")}
+              >
+                Kg
+              </span>
+              <span
+                className={weightUnit === "LBS" ? "bg-blue-800 text-white" : ""}
+                onClick={() => setWeightUnit("LBS")}
+              >
+                LBS
+              </span>
+            </div>
+          )}
         </div>
         <Input
           size="lg"
@@ -114,7 +118,7 @@ function SetsDetails({
               resetField("setsDetailWeight");
             }}
             variation="primary"
-            size="lg"
+            size="md"
           >
             Ok
           </Button>
@@ -125,7 +129,7 @@ function SetsDetails({
               resetField("setsDetailWeight");
             }}
             variation="danger"
-            size="lg"
+            size="md"
           >
             Cancel
           </Button>

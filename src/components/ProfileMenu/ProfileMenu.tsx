@@ -16,7 +16,7 @@ function ProfileMenu() {
       <div className={styles["profile-menu"]}>
         <Modal>
           <Modal.Open opens="profile-menu">
-            <Button size="md" variation="primary">
+            <Button size="sm" variation="primary">
               Change Password
             </Button>
           </Modal.Open>
@@ -30,7 +30,7 @@ function ProfileMenu() {
               navigate("/");
             });
           }}
-          size="md"
+          size="sm"
           variation="primary"
         >
           Sign Out

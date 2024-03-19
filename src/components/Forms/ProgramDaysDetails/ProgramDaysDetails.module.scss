@@ -1,19 +1,26 @@
+@import "../../../styles/mixins";
+
 .days-details {
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
-  gap: 4rem;
-  padding: 2rem;
-  width: 35vw;
-  height: 50vh;
+  gap: 3rem;
+  padding: 1.5rem;
+  width: 70vw;
   left: 50%;
   top: 50%;
   z-index: 4;
   transform: translate(-50%, -50%);
   background-color: var(--color-white);
   overflow: hidden;
+
+  @include respond(phone) {
+    padding: 2rem;
+    gap: 4rem;
+    width: min(30vw, 70rem);
+  }
 }
 
 .overlay {

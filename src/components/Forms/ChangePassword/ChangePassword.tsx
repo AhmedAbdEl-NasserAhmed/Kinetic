@@ -27,7 +27,7 @@ function ChangePassword() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-4xl font-bold">Change Password</h2>
+      <h2 className="text-2xl sm:text-4xl font-bold">Change Password</h2>
       <Input
         size="lg"
         errors={errors}
@@ -64,7 +64,7 @@ function ChangePassword() {
             value === getValues().resetPassword || "Password does not match",
         }}
       />
-      <Button size="md" value="submit" variation="primary">
+      <Button size="sm" value="submit" variation="primary">
         Reset Password
       </Button>
     </form>

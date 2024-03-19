@@ -89,7 +89,7 @@ function AddCustomProgram({ setShowModal }: Props) {
       onSubmit={handleSubmit(onSubmit)}
       className={styles["custom-program"]}
     >
-      <h2 className="text-5xl font-extrabold text-blue-800">
+      <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-800">
         Add your Program
       </h2>
 
@@ -109,7 +109,7 @@ function AddCustomProgram({ setShowModal }: Props) {
         }}
       />
 
-      <h2 className="text-4xl font-extrabold">Num of Days</h2>
+      <h2 className="text-3xl sm:text-4xl font-extrabold">Num of Days</h2>
 
       <div className="flex items-center gap-[5rem] ">
         <Input

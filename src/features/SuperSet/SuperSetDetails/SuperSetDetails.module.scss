@@ -1,14 +1,26 @@
+@import "../../../styles/mixins";
+
 .superSet-details {
-  width: min(50vw, 80rem);
+  width: 95vw;
   background-color: var(--color-white);
-  border-radius: 10px;
+  border-radius: 2px;
   overflow-y: scroll;
-  height: 90vh;
+  height: 80vh;
+
+  @include respond(phone) {
+    width: min(70vw, 80rem);
+    height: 90vh;
+    border-radius: 10px;
+  }
 
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
-    padding: min(2vw, 6rem);
+    gap: 4rem;
+    padding: min(5vw, 6rem);
+
+    @include respond(phone) {
+      gap: 5rem;
+    }
   }
 }

@@ -80,10 +80,12 @@ function DropSetDetails({ workout }: Props) {
         </div>
       </div>
 
-      <div className="bg-slate-200 p-[2rem] flex flex-col gap-[8rem]">
+      <div className="bg-slate-200 p-[2rem] flex flex-col gap-[6rem] sm:gap-[8rem]">
         <div className="flex items-center justify-between">
-          <h2 className="text-5xl font-extrabold text-blue-800">Drop Set</h2>
-          <span className="text-3xl bg-blue-800 p-4 rounded-lg text-white">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-800">
+            Drop Set
+          </h2>
+          <span className="text-xl sm:text-3xl bg-blue-800 p-4 rounded-lg text-white">
             <FaFireFlameSimple />
           </span>
         </div>

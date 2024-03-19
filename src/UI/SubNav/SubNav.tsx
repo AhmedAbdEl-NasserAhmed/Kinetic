@@ -13,7 +13,9 @@ function SubNav({ ...props }: Props) {
         <div className={styles["sub-nav__container"]}>
           <div>
             <p className="text-[2rem]">{props.paragraph}</p>
-            <h2 className="text-[4.5rem] font-bold">{props.header}</h2>
+            <h2 className="text-[2.5rem] sm:text-[4.5rem] font-bold">
+              {props.header}
+            </h2>
           </div>
           <span>&nbsp;</span>
         </div>

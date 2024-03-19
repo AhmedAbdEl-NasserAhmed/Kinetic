@@ -1,9 +1,16 @@
+@import "../../../styles/mixins";
+
 .custom-program {
-  width: 50vw;
-  padding: min(3vw, 5rem);
+  width: 90vw;
+  padding: min(6vw, 3rem);
   background-color: var(--color-white);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 3rem;
+
+  @include respond(phone) {
+    width: min(50vw, 70rem);
+    gap: 4rem;
+  }
 }

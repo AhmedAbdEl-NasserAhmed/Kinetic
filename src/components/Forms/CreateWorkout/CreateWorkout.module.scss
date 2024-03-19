@@ -1,18 +1,31 @@
+@import "../../../styles/mixins";
+
 .form {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 4rem;
   background-color: var(--color-white);
-  border-radius: 10px;
-  width: 60vw;
-  height: 80vh;
+  border-radius: 5px;
+  width: 90vw;
+  height: 85vh;
   overflow-y: scroll;
 
+  @include respond(phone) {
+    width: min(65vw, 80rem);
+    height: 80vh;
+    border-radius: 10px;
+  }
+
   &__container {
-    padding: 2.5rem 4rem;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 3.5rem;
+    gap: 3rem;
+
+    @include respond(phone) {
+      padding: 2.5rem 4rem;
+      gap: 3.5rem;
+    }
   }
 }

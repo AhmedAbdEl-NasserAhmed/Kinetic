@@ -1,14 +1,26 @@
+@import "../../../styles/mixins";
+
 .basicWorkout-details {
-  width: min(50vw, 80rem);
+  width: 90vw;
   background-color: var(--color-white);
-  border-radius: 10px;
+  border-radius: 2px;
   overflow-y: scroll;
-  height: 85vh;
+  height: 80vh;
+
+  @include respond(phone) {
+    height: 85vh;
+    width: min(65vw, 80rem);
+    border-radius: 10px;
+  }
 
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 4rem;
     padding: min(2vw, 6rem);
+
+    @include respond(phone) {
+      gap: 5rem;
+    }
   }
 }
