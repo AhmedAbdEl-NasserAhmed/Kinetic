@@ -28,6 +28,7 @@ const defaultValues: DefaultValues = {
   targetedMuscle: "",
   setsDetailReps: "",
   setsDetailWeight: "",
+  textArea: "",
 };
 
 function CreateWorkout({ setShowModal }: Props) {
@@ -221,6 +222,7 @@ function CreateWorkout({ setShowModal }: Props) {
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-5">
             TARGETED MUSCLE:
           </h2>
+
           <div className="flex gap-[3rem]  sm:justify-start items-center flex-wrap ">
             {radioButtons.map((button) => (
               <HiddenRadioButton

@@ -17,6 +17,7 @@ export interface DefaultValues {
     superSetName: string;
   };
   dropSetsNumber?: number;
+  textArea?: string;
 }
 
 export interface WorkoutObject {

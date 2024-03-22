@@ -54,7 +54,7 @@ function Button({
       case "sm":
         buttonSize = {
           padding:
-            " inline-block rounded-[5px] w-[100%] px-[1.2rem] py-[0.6rem] sm:py-[0.8rem] sm:px-[1.4rem] text-[1.2rem] sm:text-[1.4rem] ",
+            " inline-block rounded-[5px] w-[100%] px-[1.2rem] py-[0.6rem] sm:py-[0.8rem] sm:px-[1.4rem] text-[1.2rem] sm:text-[1.4rem]  ",
         };
         break;
     }

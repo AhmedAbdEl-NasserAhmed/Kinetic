@@ -14,15 +14,7 @@ function ProgramItem({ program }: Props) {
   const [deleteWorkout, response] = useDeleteProgramMutation();
 
   return (
-    <li className={styles["program-item"]}>
-      <Link to={`/programs/${program?.id}`}>
-        <div>
-          <h1 className={styles["program-item__heading"]}>
-            {program?.name?.toUpperCase()}
-          </h1>
-          <p>Program</p>
-        </div>
-      </Link>
+    <div className="relative">
       {program.isCustom && (
         <Modal>
           <Modal.Open opens="delete-program">
@@ -41,7 +33,17 @@ function ProgramItem({ program }: Props) {
           </Modal.Window>
         </Modal>
       )}
-    </li>
+      <Link to={`/programs/${program?.id}`}>
+        <li className={styles["program-item"]}>
+          <div>
+            <h1 className={styles["program-item__heading"]}>
+              {program?.name?.toUpperCase()}
+            </h1>
+            <p>Program</p>
+          </div>
+        </li>
+      </Link>
+    </div>
   );
 }
 
