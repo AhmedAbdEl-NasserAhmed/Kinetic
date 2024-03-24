@@ -18,6 +18,7 @@ export interface DefaultValues {
   };
   dropSetsNumber?: number;
   textArea?: string;
+  restTime?: string;
 }
 
 export interface WorkoutObject {

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks/hooks";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import { HiPlay } from "react-icons/hi2";
 import Container from "../../ui/Container/Container";
@@ -13,10 +13,24 @@ function Nav() {
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handler(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    }
+
+    window.addEventListener("click", handler);
+
+    return () => window.removeEventListener("click", handler);
+  }, [setShowProfileMenu]);
+
   return (
     <nav className=" relative bg-blue-800 p-[2rem] ">
       <Container>
-        <div className={styles["nav-container"]}>
+        <div ref={menuRef} className={styles["nav-container"]}>
           <div className="flex items-center gap-[1.5rem] sm:gap-[2rem]  md:gap-[4rem]">
             <span
               className="flex items-center gap-[0.5rem] text-white text-2xl cursor-pointer"
@@ -31,10 +45,9 @@ function Nav() {
               My Profile
               <HiPlay className=" text-xl rotate-90" />
             </span>
+            {showProfileMenu && <ProfileMenu />}
           </div>
           <h1 className="text-2xl text-white">Welcome , {user?.displayName}</h1>
-
-          {showProfileMenu && <ProfileMenu />}
         </div>
       </Container>
     </nav>

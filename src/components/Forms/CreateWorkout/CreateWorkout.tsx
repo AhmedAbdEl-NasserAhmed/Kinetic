@@ -17,6 +17,10 @@ import PillShape from "../../../ui/PillShape/PillShape";
 import SuperSet from "../../../features/SuperSet/SuperSet";
 import DropSet from "../../../features/DropSet/DropSet";
 import { getScroll } from "../../../helpers/getScroll";
+import { restTimeTimer } from "../../../helpers/restTimeTimer";
+import RestTimeOptions from "../../RestTimeOptions/RestTimeOptions";
+import { HiClock, HiPlay } from "react-icons/hi2";
+import { HiOutlineRefresh } from "react-icons/hi";
 
 interface Props {
   setShowModal?: () => void;
@@ -28,7 +32,7 @@ const defaultValues: DefaultValues = {
   targetedMuscle: "",
   setsDetailReps: "",
   setsDetailWeight: "",
-  textArea: "",
+  restTime: "60",
 };
 
 function CreateWorkout({ setShowModal }: Props) {
@@ -68,6 +72,12 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const [toggleSets, setToggleSets] = useState("");
 
+  const [showRestMenu, setShowResetMenu] = useState(false);
+
+  const [timer, setTimer] = useState<string>("00:00");
+
+  const [timerInterval, setTimerInterval] = useState();
+
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
   const areAllSuperSetsCompleted = superSets.every((set) => set.isCompleted);
@@ -77,8 +87,6 @@ function CreateWorkout({ setShowModal }: Props) {
   const [addWorkoutProgram] = useAddWorkoutProgramMutation();
 
   const { name } = useParams();
-
-  console.log("FORM - DATA", formData);
 
   function onSubmit() {
     const uncompletedElement = document.getElementsByClassName("not-complete");
@@ -202,7 +210,58 @@ function CreateWorkout({ setShowModal }: Props) {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div id="create-workout" className={styles["form__container"]}>
-        <h2 className="text-4xl sm:text-5xl font-extrabold">Add Workout</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-3xl sm:text-5xl font-extrabold self-end">
+            Add Workout
+          </h2>
+
+          <div className="flex flex-col items-center gap-3 sm:gap-5 ">
+            <h2 className="text-2xl sm:text-4xl text-blue-800 font-extrabold">
+              {timer}
+            </h2>
+            <div className="flex items-center gap-5 sm:gap-12 ">
+              <Button
+                disabled={timer !== "00:00" ? true : false}
+                type="button"
+                onClick={() =>
+                  restTimeTimer(setTimer, formData.restTime, setTimerInterval)
+                }
+                variation="primary"
+                size="sm"
+              >
+                <HiPlay />
+              </Button>
+              <Button
+                type="button"
+                onClick={() => setShowResetMenu(true)}
+                variation="primary"
+                size="sm"
+              >
+                <HiClock />
+              </Button>
+              <Button
+                type="button"
+                onClick={() => {
+                  setTimer("00:00");
+                  clearInterval(timerInterval);
+                }}
+                variation="danger"
+                size="sm"
+              >
+                <HiOutlineRefresh />
+              </Button>
+            </div>
+            {showRestMenu && (
+              <RestTimeOptions
+                setTimer={setTimer}
+                timerInterval={timerInterval}
+                setShowResetMenu={setShowResetMenu}
+                register={register}
+                formData={formData}
+              />
+            )}
+          </div>
+        </div>
         <Input
           size="lg"
           id="workoutName"
@@ -253,6 +312,7 @@ function CreateWorkout({ setShowModal }: Props) {
 
         <div className="flex items-center gap-[5rem] ">
           <Input
+            disabled={true}
             size="md"
             placeholder="NUM OF SETS:"
             id="setsNumber"

@@ -113,6 +113,7 @@ function AddCustomProgram({ setShowModal }: Props) {
 
       <div className="flex items-center gap-[5rem] ">
         <Input
+          disabled={true}
           size="md"
           placeholder="NUM OF DAYS:"
           id="programDaysNumber"

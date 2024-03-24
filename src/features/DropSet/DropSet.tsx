@@ -103,6 +103,7 @@ function DropSet({
 
       <div className="flex items-center">
         <Input
+          disabled={true}
           size="md"
           placeholder="DROP SETS:"
           id="dropSetsNumber"

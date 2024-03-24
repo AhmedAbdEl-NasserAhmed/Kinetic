@@ -12,31 +12,29 @@ function ProfileMenu() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className={styles["profile-menu"]}>
-        <Modal>
-          <Modal.Open opens="profile-menu">
-            <Button size="sm" variation="primary">
-              Change Password
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="profile-menu">
-            <ChangePassword />
-          </Modal.Window>
-        </Modal>
-        <Button
-          onClick={(): void => {
-            dispatch(userSignOut()).then(() => {
-              navigate("/");
-            });
-          }}
-          size="sm"
-          variation="primary"
-        >
-          Sign Out
-        </Button>
-      </div>
-    </>
+    <div className={styles["profile-menu"]}>
+      <Modal>
+        <Modal.Open opens="profile-menu">
+          <Button size="sm" variation="primary">
+            Change Password
+          </Button>
+        </Modal.Open>
+        <Modal.Window name="profile-menu">
+          <ChangePassword />
+        </Modal.Window>
+      </Modal>
+      <Button
+        onClick={(): void => {
+          dispatch(userSignOut()).then(() => {
+            navigate("/");
+          });
+        }}
+        size="sm"
+        variation="primary"
+      >
+        Sign Out
+      </Button>
+    </div>
   );
 }
 
