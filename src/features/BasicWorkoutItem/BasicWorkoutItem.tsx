@@ -39,11 +39,15 @@ function BasicWorkoutItem({ workout }: Props) {
           </h4>
           <h4 className={styles["workout-item__details"]}>
             Total Reps:{" "}
-            <span className="text-blue-800 font-bold">{totalReps}</span>
+            <span className="text-blue-800 font-bold">
+              {Math.round(Number(totalReps))}
+            </span>
           </h4>
           <h4 className={styles["workout-item__details"]}>
             Total Weight Lifted:{" "}
-            <span className="text-blue-800 font-bold">{totalWeights}</span>
+            <span className="text-blue-800 font-bold">
+              {Math.round(Number(totalWeights))}
+            </span>
           </h4>
         </div>
       </div>

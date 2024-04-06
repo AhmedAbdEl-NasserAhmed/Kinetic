@@ -35,6 +35,15 @@ export interface WorkoutObject {
   dropSets?: ISetObject[];
 }
 
+export interface PrevWorkout {
+  workoutName: string;
+  sets: ISetObject[];
+  workoutCategory: string;
+  superSetName?: string;
+  superSets?: ISetObject[];
+  dropSets?: ISetObject[];
+}
+
 export interface CustomDayProgram {
   id: string;
   name: string;

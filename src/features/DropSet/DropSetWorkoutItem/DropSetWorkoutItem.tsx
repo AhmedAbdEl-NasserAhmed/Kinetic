@@ -54,12 +54,17 @@ function DropSetWorkoutItem({ workout }: Props) {
               </span>
               <span>
                 {" "}
-                Total Reps: <span className="text-blue-800"> {totalReps}</span>
+                Total Reps:{" "}
+                <span className="text-blue-800">
+                  {Math.round(Number(totalReps))}
+                </span>
               </span>
               <span>
                 {" "}
                 Total Weight Lifted:{" "}
-                <span className="text-blue-800"> {totalWeights}</span>
+                <span className="text-blue-800">
+                  {Math.round(Number(totalWeights))}
+                </span>
               </span>
             </div>
           </div>

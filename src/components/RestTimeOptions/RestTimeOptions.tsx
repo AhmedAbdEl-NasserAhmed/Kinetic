@@ -30,7 +30,7 @@ function RestTimeOptions({
         <h2 className="text-3xl sm:text-4xl font-extrabold">
           Choose your rest Time
         </h2>
-        <ul className="flex gap-10 items-center justify-center flex-wrap">
+        <ul className="flex gap-10 items-center justify-center  flex-wrap">
           {restTime.map((restTime) => {
             return (
               <HiddenRadioButton

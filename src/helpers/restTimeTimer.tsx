@@ -1,4 +1,4 @@
-const whistle = new Audio("../../referee-whistle.mp3");
+const whistle = new Audio("../assets/audio/referee-whistle.mp3");
 
 export function restTimeTimer(setTimer, duration, setTimerInterval) {
   let time = Number(duration);

@@ -18,8 +18,6 @@ function SuperSet({
   selectedSuperSet,
   formData,
   resetField,
-  // weightUnit,
-  // setWeightUnit,
   setShowModal,
   setShowSuperSetForm,
   toggleSets,
@@ -86,8 +84,6 @@ function SuperSet({
 
       {showSuperSetDetails && (
         <SetsDetails
-          // weightUnit={weightUnit}
-          // setWeightUnit={setWeightUnit}
           resetField={resetField}
           setArraySets={setSuperSets}
           sets={superSets}

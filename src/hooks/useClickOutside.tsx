@@ -1,17 +1,18 @@
 import { useEffect, useRef } from "react";
 
 interface Props {
-  close?: (name: string) => void;
+  close?: (value) => void;
   StopBubbling?: boolean;
+  value: string | boolean;
 }
 
-function useClickOutside({ close, StopBubbling }: Props) {
+function useClickOutside({ close, value, StopBubbling }: Props) {
   const ref = useRef(null);
 
   useEffect(() => {
     function handler(e: Event) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
-        close("");
+        close(value);
         document.body.classList.remove("stop-scrolling");
       }
     }
@@ -19,7 +20,7 @@ function useClickOutside({ close, StopBubbling }: Props) {
     window.addEventListener("click", handler, StopBubbling);
 
     return () => window.removeEventListener("click", handler, StopBubbling);
-  }, [close, StopBubbling]);
+  }, [close, StopBubbling, value]);
 
   return ref;
 }

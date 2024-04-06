@@ -9,6 +9,7 @@ interface Props {
   type: string;
   errors: object;
   size: string;
+  onClick?: () => void;
   disabled?: boolean;
   register?: UseFormRegister<FieldValues>;
   value?: string | number;
@@ -43,6 +44,7 @@ function Input({
   validiationInputs,
   register,
   value,
+  onClick,
   size,
   disabled,
 }: Props) {
@@ -76,6 +78,7 @@ function Input({
   return (
     <div className="flex flex-col gap-5">
       <input
+        onClick={onClick}
         name={name}
         id={id}
         value={value}

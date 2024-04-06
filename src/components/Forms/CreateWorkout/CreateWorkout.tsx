@@ -19,8 +19,10 @@ import DropSet from "../../../features/DropSet/DropSet";
 import { getScroll } from "../../../helpers/getScroll";
 import { restTimeTimer } from "../../../helpers/restTimeTimer";
 import RestTimeOptions from "../../RestTimeOptions/RestTimeOptions";
-import { HiClock, HiPlay } from "react-icons/hi2";
+import { HiBackward, HiClock, HiPlay } from "react-icons/hi2";
 import { HiOutlineRefresh } from "react-icons/hi";
+import DropDownWorkoutsList from "../../DropDownWorkoutsList/DropDownWorkoutsList";
+import LastWorkoutDetails from "../../LastWorkoutDetails/LastWorkoutDetails";
 
 interface Props {
   setShowModal?: () => void;
@@ -78,13 +80,20 @@ function CreateWorkout({ setShowModal }: Props) {
 
   const [timerInterval, setTimerInterval] = useState();
 
+  const [showPrevoisWorkouts, setShowPreviousWorkouts] =
+    useState<boolean>(false);
+
+  const [comparableWorkoutName, setComparableWorkoutName] = useState("");
+
+  const [showLastWorkOutDetails, setShowWorkoutDetails] = useState(false);
+
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
   const areAllSuperSetsCompleted = superSets.every((set) => set.isCompleted);
 
   const { user } = useAppSelector((state) => state.authentication);
 
-  const [addWorkoutProgram] = useAddWorkoutProgramMutation();
+  const [addWorkoutProgram, response] = useAddWorkoutProgramMutation();
 
   const { name } = useParams();
 
@@ -192,6 +201,12 @@ function CreateWorkout({ setShowModal }: Props) {
   // console.log("FormData", formData);
 
   useEffect(() => {
+    if (comparableWorkoutName !== "") {
+      setValue("workoutName", comparableWorkoutName);
+    }
+  }, [comparableWorkoutName, setValue]);
+
+  useEffect(() => {
     const workoutContainer = document.getElementById(
       "create-workout"
     )! as HTMLFormElement;
@@ -211,9 +226,27 @@ function CreateWorkout({ setShowModal }: Props) {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div id="create-workout" className={styles["form__container"]}>
         <div className="flex justify-between items-center">
-          <h2 className="text-3xl sm:text-5xl font-extrabold self-end">
-            Add Workout
-          </h2>
+          <div className="flex flex-col gap-[1.5rem] ">
+            {
+              <span
+                onClick={() => setShowWorkoutDetails(true)}
+                className={`text-6xl text-blue-500 cursor-pointer ${
+                  comparableWorkoutName !== "" ? "block" : "hidden"
+                }`}
+              >
+                <HiBackward />
+              </span>
+            }
+            {showLastWorkOutDetails && (
+              <LastWorkoutDetails
+                setShowWorkoutDetails={setShowWorkoutDetails}
+                comparableWorkoutName={comparableWorkoutName}
+              />
+            )}
+            <h2 className="text-3xl sm:text-5xl font-extrabold self-end">
+              Add Workout
+            </h2>
+          </div>
 
           <div className="flex flex-col items-center gap-3 sm:gap-5 ">
             <h2 className="text-2xl sm:text-4xl text-blue-800 font-extrabold">
@@ -263,6 +296,7 @@ function CreateWorkout({ setShowModal }: Props) {
           </div>
         </div>
         <Input
+          onClick={() => setShowPreviousWorkouts(true)}
           size="lg"
           id="workoutName"
           name="workoutName"
@@ -277,6 +311,16 @@ function CreateWorkout({ setShowModal }: Props) {
             },
           }}
         />
+
+        {showPrevoisWorkouts && (
+          <DropDownWorkoutsList
+            clearErrors={clearErrors}
+            setComparableWorkoutName={setComparableWorkoutName}
+            formData={formData}
+            setShowPreviousWorkouts={setShowPreviousWorkouts}
+          />
+        )}
+
         <div className="flex flex-col gap-7">
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-5">
             TARGETED MUSCLE:
@@ -333,6 +377,7 @@ function CreateWorkout({ setShowModal }: Props) {
           />
           <div className="flex items-center gap-10 ">
             <Button
+              disabled={response.isLoading}
               type="button"
               size="sm"
               variation="primary"
@@ -341,6 +386,7 @@ function CreateWorkout({ setShowModal }: Props) {
               +
             </Button>
             <Button
+              disabled={response.isLoading}
               type="button"
               size="sm"
               variation="danger"
@@ -409,10 +455,16 @@ function CreateWorkout({ setShowModal }: Props) {
               />
             </div>
             <div className="flex gap-5 sm:basis-[30rem]">
-              <Button type="submit" variation="primary" size="md">
+              <Button
+                disabled={response.isLoading}
+                type="submit"
+                variation="primary"
+                size="md"
+              >
                 Add Workout
               </Button>
               <Button
+                disabled={response.isLoading}
                 type="button"
                 onClick={setShowModal}
                 variation="danger"

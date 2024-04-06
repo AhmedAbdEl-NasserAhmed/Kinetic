@@ -73,7 +73,7 @@ function Toggle({ id }) {
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
 
-  const menuRef = useClickOutside({ close, StopBubbling: false });
+  const menuRef = useClickOutside({ close, value: "", StopBubbling: false });
 
   function hanldeScrolling() {
     close("");
