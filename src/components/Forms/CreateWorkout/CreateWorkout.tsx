@@ -10,7 +10,11 @@ import SetsDetails from "../SetsDetails/SetsDetails";
 import { useAppSelector } from "../../../hooks/hooks";
 import { useAddWorkoutProgramMutation } from "../../../services/workoutApi";
 import { useParams } from "react-router-dom";
-import { ISetObject, DefaultValues } from "../../../interfaces/interfaces";
+import {
+  ISetObject,
+  DefaultValues,
+  WorkoutObject,
+} from "../../../interfaces/interfaces";
 import NewAddedSet from "../../NewAddedSet/NewAddedSet";
 import { FaFireFlameCurved, FaFireFlameSimple } from "react-icons/fa6";
 import PillShape from "../../../ui/PillShape/PillShape";
@@ -23,6 +27,7 @@ import { HiBackward, HiClock, HiPlay } from "react-icons/hi2";
 import { HiOutlineRefresh } from "react-icons/hi";
 import DropDownWorkoutsList from "../../DropDownWorkoutsList/DropDownWorkoutsList";
 import LastWorkoutDetails from "../../LastWorkoutDetails/LastWorkoutDetails";
+import useSetLastWorkout from "../../../hooks/useSetLastWorkout";
 
 interface Props {
   setShowModal?: () => void;
@@ -86,6 +91,8 @@ function CreateWorkout({ setShowModal }: Props) {
   const [comparableWorkoutName, setComparableWorkoutName] = useState("");
 
   const [showLastWorkOutDetails, setShowWorkoutDetails] = useState(false);
+
+  const [lastWorkout, setLastWorkout] = useState<WorkoutObject>();
 
   const areAllSetsCompleted = sets.every((set) => set.isCompleted);
 
@@ -198,13 +205,19 @@ function CreateWorkout({ setShowModal }: Props) {
     setValue("setsNumber", Number(setNumbersInput.value) - 1);
   }
 
-  // console.log("FormData", formData);
-
   useEffect(() => {
     if (comparableWorkoutName !== "") {
       setValue("workoutName", comparableWorkoutName);
+      setValue("targetedMuscle", lastWorkout?.tragetedMuscle);
+    } else {
+      unregister("targetedMuscle");
     }
-  }, [comparableWorkoutName, setValue]);
+  }, [
+    comparableWorkoutName,
+    setValue,
+    lastWorkout?.tragetedMuscle,
+    unregister,
+  ]);
 
   useEffect(() => {
     const workoutContainer = document.getElementById(
@@ -221,6 +234,8 @@ function CreateWorkout({ setShowModal }: Props) {
       });
     }, 1000);
   }, []);
+
+  useSetLastWorkout(comparableWorkoutName, setLastWorkout);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -239,8 +254,8 @@ function CreateWorkout({ setShowModal }: Props) {
             }
             {showLastWorkOutDetails && (
               <LastWorkoutDetails
+                lastWorkout={lastWorkout}
                 setShowWorkoutDetails={setShowWorkoutDetails}
-                comparableWorkoutName={comparableWorkoutName}
               />
             )}
             <h2 className="text-3xl sm:text-5xl font-extrabold self-end">
